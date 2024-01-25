@@ -1,0 +1,7 @@
+RewriteCond %{REQUEST_URI} !^/movies/public/
+RewriteRule ^(.*)$ /movies/public/$1 [L]
+
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule . index.php [L]

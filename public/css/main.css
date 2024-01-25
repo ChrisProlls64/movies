@@ -1,0 +1,139 @@
+:root {
+  --primary-color: #FFF;
+  --active-color: #353535;
+  --background-color: #;
+  --default-color: #;
+}
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, main {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, main {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+header {
+  max-width: 1207px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 17px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+body {
+  background-color: var(--primary-color);
+}
+body p {
+  color: var(--active-color);
+  font-weight: 300;
+}
+
+.wrapper {
+  max-width: 1312px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@font-face {
+  font-family: "Arcane";
+  src: url("fonts/Arcane.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: "Arcane", sans-serif;
+}
+
+#site-search {
+  width: 416px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  color: #999999;
+  border-style: none;
+  margin-top: auto;
+  margin-bottom: auto;
+  outline: none;
+}
+
+button {
+  background-color: var(--primary-color);
+  border: none;
+}
+
+.search {
+  margin-top: 15px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #707070;
+}
+
+/*# sourceMappingURL=main.css.map */
