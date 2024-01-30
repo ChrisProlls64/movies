@@ -5,6 +5,7 @@
     --active-color: #353535;
     --background-color: #;
     --default-color: #;
+    --default-font: arial;
 }
 
 //fonts
@@ -13,6 +14,7 @@ $title-font: 'Arcane', sans-serif;
 
 // imports
 @import'_reset';
+@import'_mixins';
 @import'_default';
 @import'_header';
 

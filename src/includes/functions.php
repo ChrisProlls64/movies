@@ -83,7 +83,7 @@ function logoutTimer()
     global $router;
 
     if (!empty($_SESSION['user']['lastLogin'])) {
-        $expireHour = 1;
+        $expireHour = 4;
 
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
@@ -119,9 +119,9 @@ function limitLoginAttempts(int $maxAttempts, int $periodeRateLimit) : void
         $_SESSION['loginAttempts'][$adresseIP]++;
     }
 
-    // Check si le nombre de tentatives dépasse le seuil
-    if ($_SESSION['loginAttempts'][$adresseIP] > $maxAttempts) {
-        alert('Trop de tentatives de connexion. Veuillez réessayer plus tard.');
+    // Check si le nombre de tentatives dépasse le seuil À revoir
+    if ($_SESSION['loginAttempts'][$adresseIP] > $maxAttempts && time() - $_SESSION['timestamp'][$adresseIP] < $periodeRateLimit) {
+        // alert('Trop de tentatives de connexion. Veuillez réessayer plus tard.');
         // header('Location: ' . $router->generate('home'));
         // die;
     }
@@ -135,4 +135,4 @@ function limitLoginAttempts(int $maxAttempts, int $periodeRateLimit) : void
     // dump($adresseIP);
 }
 
-// limitLoginAttempts(3, 3600);
+limitLoginAttempts(5, 3600);

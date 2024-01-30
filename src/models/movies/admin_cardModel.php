@@ -11,3 +11,4 @@ function displayCard()
 
 }
 dump(displayCard());
+print_r($_FILES);

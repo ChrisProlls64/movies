@@ -155,34 +155,29 @@ function checkDurationFieldAndGetErrorMessage($field): ?string
  */
 
 
-function checkImageFieldAndGetErrorMessage($field, int $sizeMax, array $extensions): ?string
-{
-    if (!isset($_FILES[$field])){
-        return null;
-    }
-    if (empty($_FILES[$field])) {
-        return wrapInErrorSpan('Merci de renseigner le champ.');
-    }
-    if ($_FILES[$field]['size'] > $sizeMax) {
-        return wrapInErrorSpan('Votre piece jointe ne doit pas dépasser 2Mo');
-    }
-    if ($extensions != strtolower(substr(strrchr($_FILES[$field]['name'], '.'), 1))) {
-        return wrapInErrorSpan('Votre piece jointe doit être au format jpg, jpeg, pdf ou png');
-    }
-    return null;
-}
+// function checkImageFieldAndGetErrorMessage($field, int $sizeMax, array $extensions): ?string
+// {
+//     if (!isset($_FILES[$field])){
+//         return null;
+//     }
+//     if (empty($_FILES[$field])) {
+//         return wrapInErrorSpan('Merci de renseigner le champ.');
+//     }
+//     if ($_FILES[$field]['size'] > $sizeMax) {
+//         return wrapInErrorSpan('Votre piece jointe ne doit pas dépasser 2Mo');
+//     }
+//     if ($extensions != strtolower(substr(strrchr($_FILES[$field]['name'], '.'), 1))) {
+//         return wrapInErrorSpan('Votre piece jointe doit être au format jpg, jpeg, pdf ou png');
+//     }
+//     return null;
+// }
 
 
 
-/**	
- * Upload file
- * 
- * @param string $path to save file
- * @param string $field name of input type file
- */
 
 
-function uploadFile(string $path, string $field, array $exts = ['jpg', 'png', 'jpeg'], int $maxSize = 2097152): string
+
+function checkImageFieldAndGetErrorMessage($field, $path, int $maxSize = 2097152, array $exts = ['jpg', 'png', 'jpeg']): ?string
 {
 	// Check submit form with post method
 	if (empty($_FILES)) :
@@ -217,18 +212,31 @@ function uploadFile(string $path, string $field, array $exts = ['jpg', 'png', 'j
 		return wrapInErrorSpan('Merci de charger un fichier ne dépassant pas cette taille : ' . formatBytes($maxSize));
 	endif;
 
-	$filename = pathinfo($_FILES[$field]['name'], PATHINFO_FILENAME);
-	$filename = renameFile($filename);
-	$targetToSave = $path . '/' . $filename . '.' . $currentExt;
-	
-	if(move_uploaded_file($_FILES[$field]['tmp_name'], $targetToSave)) :
-		return wrapInSuccessSpan('Super !');
-	endif;
-
-	return '';
+    return null;
 }
 
 
+
+/**	
+ * Upload file
+ * 
+ * @param string $path to save file
+ * @param string $field name of the field the file comes from
+ * @param string $renamer name that will be used to rename the uploaded file  
+ */
+
+
+function uploadFile(string $path, string $field, $renamer)
+{
+    // $renamer = $_POST['title'];
+	$targetToSave = $path . '/' . renameFile($renamer) . '.' . pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION);
+	
+	if(move_uploaded_file($_FILES[$field]['tmp_name'], $targetToSave)){
+		return alert('Super !', 'success');
+    }
+
+	return '';
+}
 
 function formatBytes($size, $precision = 2) {
 	$base     = log($size, 1024);
@@ -238,7 +246,7 @@ function formatBytes($size, $precision = 2) {
 }
 
 
-function renameFile(string $name) {
+function renameFile($name) {
 	$name = trim($name);
 	$name = strip_tags($name);
 	$name = removeAccent($name);

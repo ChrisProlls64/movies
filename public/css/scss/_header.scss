@@ -8,6 +8,11 @@ header {
     flex-wrap: wrap;
     justify-content: space-between;
 
+    input[type="submit"] {
+        @include button;
+        background-color: var(--header);
+    }
+
 }
 
 .menu {

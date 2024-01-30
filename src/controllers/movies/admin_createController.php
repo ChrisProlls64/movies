@@ -17,8 +17,7 @@ $errorMessages['title'] = checkTextFieldAndGetErrorMessage('title', 100);
 $errorMessages['releaseDate'] = checkDateFieldAndGetErrorMessage('releaseDate');
 $errorMessages['director'] = checkTextFieldAndGetErrorMessage('director', 255);
 $errorMessages['duration'] = checkDurationFieldAndGetErrorMessage('duration');
-$errorMessages['poster'] = checkImageFieldAndGetErrorMessage('poster', 2097152, array('jpg', 'jpeg', 'pdf', 'png'));
-$errorMessages['poster'] = checkImageFieldAndGetErrorMessage('poster', 2097152, array('jpg', 'jpeg', 'pdf', 'png'));
+$errorMessages['poster'] = checkImageFieldAndGetErrorMessage('poster', './images/poster');
 
 // dump($errorMessages);
 
@@ -43,7 +42,8 @@ $errorMessages['poster'] = checkImageFieldAndGetErrorMessage('poster', 2097152, 
 
 if (!empty($_POST)) {
     if (!empty($_POST['title'])) {
-        if (!$errorMessages['title'] || 
+        if (
+        !$errorMessages['title'] || 
         !$errorMessages['releaseDate'] || 
         !$errorMessages['director'] || 
         !$errorMessages['duration'] || 
@@ -51,9 +51,9 @@ if (!empty($_POST)) {
         !$errorMessages['categories'] || 
         !$errorMessages['note'] ||
         !$errorMessages['synopsis'] ||
-        !$errorMessages['trailer']) {
+        !$errorMessages['trailer']) 
+        {
             addMovie();
-            uploadFile('./images/poster/' . $_POST['title'] . '.' . $currentExt, 'poster', $exts, $maxSize);
         } else {
             alert('Erreur lors de l\'ajout du film.');
         }
@@ -62,7 +62,10 @@ if (!empty($_POST)) {
     }
 }
 
-// if (!empty($_POST['title']) && !empty($_POST['releaseDate']) && !empty($_POST['duration']) && !empty($_POST['director']) && !empty($_POST['poster']) && !empty($_POST['categories']) && !empty($_POST['note']) && !empty($_POST['synopsis']) && !empty($_POST['trailer']))
+// if (!empty($_FILES['poster'])){
+//     uploadFile('./images/poster', 'poster', $_POST['title']);
+// }
+
 
 
 // if (isset($_FILES['poster']) AND !empty($_FILES['poster'])){

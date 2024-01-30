@@ -11,7 +11,7 @@
             <th scope="col">Categories</th>
             <th scope="col">Note</th>
             <th scope="col">Synopsis</th>
-            <th scope="col">Trailer</th>
+            <th scope="col">Fiche</th>
             <th scope="col">Modifier</th>
             <th scope="col">Supprimer</th>
         </tr>

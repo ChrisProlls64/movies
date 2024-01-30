@@ -1,7 +1,17 @@
+RewriteEngine on
+
+# Remove end slash
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+# Force https
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirect to public folder
 RewriteCond %{REQUEST_URI} !^/movies/public/
 RewriteRule ^(.*)$ /movies/public/$1 [L]
 
-
-RewriteEngine on
+#Redirect to engine
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule . index.php [L]

@@ -1,0 +1,23 @@
+{% extends "/layouts/public.twig" %} 
+{% block title %}Detail du film {{movie.title}}{% endblock %}
+
+{% block content %}
+<div id="details-movie">
+
+    <div class="col">
+        <h1 class="title-main">{{ movie.title }}</h1>
+        <p>{{ movie.synopsis}}</p>
+
+        <ul>
+            <li>Date de sortie : {{ movie.releaseDate|date('d/m/Y') }}</li>
+            <li>Durée du film : {{ movie.duration|date('H:i:s') }}</li>
+            <li class="'note-press">Note de la presse : {{ movie.note }} / 5</li>
+        </ul>
+    </div>
+    <div class="col">
+        <img src="/img/poster/{{movie.poster}}" alt="{{movie.title}}">
+    </div> 
+    
+</div>
+{% endblock %}
+
