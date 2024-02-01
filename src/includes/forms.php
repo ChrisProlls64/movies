@@ -1,5 +1,8 @@
 <?php
 
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+
 /**
  * Check if a field is empty
  * @param string $field
@@ -35,6 +38,7 @@ function getValue($field)
     }
     return '';
 }
+
 
 /**
  * Display the error message in red
@@ -91,6 +95,30 @@ function checkTextFieldAndGetErrorMessage($field, int $size): ?string
     return null;
 }
 
+/**
+ *Check if the code in the field doesn't contain any script tag
+ *@param  
+ * 
+ */
+
+function checkIframeFieldAndGetErrorMessage($field, int $size): ?string
+{
+    if (!isset($_POST[$field])) {
+        return null;
+    }
+    if (empty($_POST[$field])) {
+        return wrapInErrorSpan('Merci de renseigner le champ.');
+    }
+    if (strlen($_POST[$field]) > $size) {
+        return wrapInErrorSpan('Le texte ne doit pas dépasser ' . $size . ' caractères.');
+    }
+    if (!empty(strpos($_POST[$field], '<script>'))){
+        return wrapInErrorSpan('Le code contient une erreur');
+
+    }
+    return null;
+}
+
 
 /**
  * Check if the date is not empty and get the error message
@@ -120,7 +148,7 @@ function checkTextFieldAndGetErrorMessage($field, int $size): ?string
 
 function isDurationValid($duration)
 {
-    $regex = '/^(\d{2}):(\d{2}):(\d{2})$/';
+    $regex = '/^(\d{2}):(\d{2})$/';
     return preg_match($regex, $_POST['duration']);
 }
 
@@ -147,7 +175,7 @@ function checkDurationFieldAndGetErrorMessage($field): ?string
 
 
 /**
- * Check if the image uploaded is ok 
+ * Check if the uploaded file is ok 
  * @param string $field
  * @param int $sizeMax
  * @param array $extensions
@@ -232,6 +260,7 @@ function uploadFile(string $path, string $field, $renamer)
 	$targetToSave = $path . '/' . renameFile($renamer) . '.' . pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION);
 	
 	if(move_uploaded_file($_FILES[$field]['tmp_name'], $targetToSave)){
+        resizeImage($targetToSave, 300);
 		return alert('Super !', 'success');
     }
 
@@ -267,4 +296,15 @@ function removeAccent($string) {
 		$string
 	);
 	return $string;
+}
+
+
+
+function resizeImage($path, $width)
+{
+    $manager = new ImageManager(new Driver());
+    $image = $manager->read($path);
+    $image->scale($width);
+    $image->save($path);
+
 }

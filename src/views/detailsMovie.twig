@@ -15,9 +15,11 @@
         </ul>
     </div>
     <div class="col">
-        <img src="/img/poster/{{movie.poster}}" alt="{{movie.title}}">
+        <img src="{{ basePath() }}images/poster/{{ movie.poster }}" alt="{{ movie.title }}" />
     </div> 
-    
+    <div>
+        {{ movie.trailer|raw }}
+    </div>
 </div>
 {% endblock %}
 

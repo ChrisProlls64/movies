@@ -21,8 +21,8 @@ $router = new AltoRouter();
 $router->setBasePath('/movies'); // à placer avant le router-> map
 
 
-require '../routes/public.php';
-require '../routes/admin.php';
+require SRC . 'routes/public.php';
+require SRC . 'routes/admin.php';
 
 
 $match = $router->match();

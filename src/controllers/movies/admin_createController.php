@@ -67,34 +67,3 @@ if (!empty($_POST)) {
 // }
 
 
-
-// if (isset($_FILES['poster']) AND !empty($_FILES['poster'])){
-//     $taillemax = 2097152;
-//     $extensionValides = array('jpg', 'jpeg', 'png', 'pdf');
-//     dump($_FILES);
-
-//     if ($_FILES['poster']['size'] <= $taillemax){
-//         $extensionUpload = strtolower(substr(strrchr($_FILES['poster']['name'], '.'), 1));
-         
-//         if (in_array($extensionUpload, $extensionValides)){
-//             $path = "./images/poster/" . $_POST['title'] . "." . $extensionUpload;
-//             $result = move_uploaded_file($_FILES['poster']['tmp_name'], $path);
-
-//             if ($result){
-//                 // $updateavatar = $bdd->prepare('INSERT INTO movies VALUES phpc = :phpc ');
-//                 // $updateavatar->execute(array(
-//                     // 'phpc' => $_POST['userid'].".".$extensionUpload,
-//                     // 'id' => $_POST['userid']
-//                 // )); 
-//                 dump($result);
-//                 alert ('Image uploadée avec succès');
-//             } else{
-//                 $message = 'Erreur lors de l\'importation de votre pièce jointe';
-//             }
-//         } else{
-//             $message = 'Votre piece jointe doit être au format jpg, jpeg, pdf';
-//         }
-//     } else{
-//        $message = 'Votre piece jointe ne doit pas dépasser 2Mo';
-//     }
-// }

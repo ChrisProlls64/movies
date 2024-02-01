@@ -12,8 +12,7 @@
             <a href="{{ getUrl('details', {'slug' : movie.slug}) }}">
                 <h2>{{ movie.title }}</h2>
                 <p>{{ movie.synopsis }}</p>
-                <img src="{{ movie.poster }}" alt="{{ movie.title }}" />
-
+                <img src="images/poster/{{ movie.poster }}" alt="{{ movie.title }}" />
             </a>
         </li>
     </article>
