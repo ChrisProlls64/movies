@@ -1,5 +1,5 @@
 header {
-    max-width: 1207px;
+    max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 17px;
@@ -15,8 +15,87 @@ header {
 
 }
 
+a {
+//    color : red;
+    text-decoration: none;
+}
+
 .menu {
+    width: 100%;
+    background-color: var(--active-color);
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 15px;
+}
+
+#header ul {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
+    // justify-content: space-between;
+
 }
+
+.menu li {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 5%;
+
+}
+
+.menu ul li a {
+    color : #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    // display: flex;
+    // flex-wrap: wrap;
+}
+
+form.search {   
+    margin-top: auto;
+    margin-bottom: 5px;
+
+    #site-search {
+        padding-bottom: 4px;
+    }
+}
+
+.login {
+    margin-top: auto;
+    margin-bottom: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .config {
+        border-right: var(--active-color) solid 1px;
+    }
+
+    a.config {
+        color: var(--active-color);
+        height: 40px;
+        padding: 10px;
+        display: flex;
+        text-align: bottom;
+        // flex-wrap: wrap;
+        // align-items: center;
+    }
+
+    .userpicto {
+        margin-right: 5px;
+    }
+    
+}
+
+a.config.round {
+padding-bottom: 12px;
+
+}
+
+// .login .round {
+//     // margin-top: 10px;
+//     align-items: center;
+// }

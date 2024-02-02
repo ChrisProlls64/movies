@@ -12,10 +12,10 @@
 <body>
     <header id="header" class="wrapper" >
         <div class="logo">
-            <a class="login" href="login.php"><img src="assets/images/animascoop_logo.png" alt="logo AnimaScoop"></a>
+            <a href="{{ basePath() }}"><img src="{{ basePath() }}images/animascoop_logo.png" alt="logo AnimaScoop"></a>
         </div>
-        <form method="get" action="search.php">
-            <div class="search">
+
+        <form class="search" method="get" action="search.php">
                 <label for="site-search" class="search-label"><input type="search" id="site-search" name="search" placeholder="Rechercher un film"></label>
                 <button type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
@@ -23,31 +23,114 @@
                     </svg>
                 </button>
             </form>
+ 
+            <div class="login">
+                <a class="config" href="{{ basePath() }}admin/connexion"><img class="round" src="{{ basePath() }}images/user_connexion.png" alt="picto_member"></a>
+                <a class="config round" href=""><img src="{{ basePath() }}images/mode-sombre.png" alt="mode sombre"></a>
+                <a class="config" href="index.php"> FR </a>
+                <a class="config round" href="help.php"><img src="{{ basePath() }}images/help.png" alt="help"></a>
+            </div>
             
-            <a class="logo" href=""><img src="{{ basePath() }}images/user_connexion.png" alt="picto_member">Mon compte </a>
-            <a class="logo" href="subscription.php"> - S'insrire </a>
-            <a class="logo" href="login.php"><img src="{{ basePath() }}images/mode-sombre.png" alt="mode sombre"></a>
-            <a class="logo" href="index.php"> FR </a>
-            <a class="logo" href="index.php"> EN </a>
-            <a class="logo" href="help.php"><img src="{{ basePath() }}images/help.png" alt="help"></a>
-
+        
         <nav class="menu">
             <ul>
-                <li><a href="index.php">Accueil</a></li>
-                <li><a href="index.php?cat=DernièresSorties">Films</a></li>
-                <li><a href="actu.php">Actualités</a></li>
-                <li><a href="commu.php?cat=Streets">Communauté</a></li>
-                <li><a href="ludotheque.php?cat=Animals">Ludothèque</a></li>
-                <li><a href="shop.php?cat=Animals">E-shop</a></li>
+                <li><a href="{{ basePath() }}">Accueil</a></li>
+                <li><a href="{{ basePath() }}">Films</a></li>
+                <li><a href="{{ basePath() }}">Actualités</a></li>
+                <li><a href="{{ basePath() }}">Communauté</a></li>
+                <li><a href="{{ basePath() }}">Ludothèque</a></li>
+                <li><a href="{{ basePath() }}">E-shop</a></li>
             </ul>
         </nav>
-        <form>
-            <input type="search" id="site-search" name="search" placeholder="Rechercher">
-            <button type="submit"> Rechercher</button>
-            
-        </form>
+
+        <p class="ariane">Accueil > {{ basePath }} </p>
 
 <body> 
    {% block content %}{% endblock %}
+
+   <footer>
+    <div id="top-footer">
+        <div class="wrap">
+            <div class="col">
+                <a href="">
+                    <img src="images/logo.png" alt="Logo">
+                </a>
+                <address>
+                    <a href="" >
+                        <img src="">
+                    </a>
+                    <p>AnimaScoop</p>
+                </address>
+            </div>
+            <div class="col">
+                <p class="title">Sitemap</p>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="">Home</a>
+                        </li>
+                        <li>
+                            <a href="">About us</a>
+                        </li>
+                        <li>
+                            <a href="">Shop</a>
+                        </li>
+                        <li>
+                            <a href="">Blog</a>
+                        </li>
+                        <li>
+                            <a href="">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col">
+                <p class="title">Ressources</p>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="">Documentations</a>
+                        </li>
+                        <li>
+                            <a href="">Support</a>
+                        </li>
+                        <li>
+                            <a href="">Customer service</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col">
+                <p class="title">Social media</p>
+                <ul id="social">
+                    <li>
+                        <a href="" title="Facebook" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    </li>
+                    <li>
+                        <a href="" title="Instagram" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    </li>
+                    <li>
+                        <a href="" title="Youtube" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="bottom-footer">
+        <nav class="wrap">
+            <ul>
+                <li>
+                    <a href="">Terms and conditions</a>
+                </li>
+                <li>
+                    <a href="">Privacy policy</a>
+                </li>
+                <li>
+                    <a href="">Cookies policy</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</footer>
 </body>
 </html>

@@ -10,7 +10,6 @@
             <th scope="col">Poster</th>
             <th scope="col">Categories</th>
             <th scope="col">Note</th>
-            <th scope="col">Synopsis</th>
             <th scope="col">Fiche</th>
             <th scope="col">Modifier</th>
             <th scope="col">Supprimer</th>
@@ -28,10 +27,9 @@
             <td><?= $movie['poster']; ?></td>
             <td><?= $movie['categories']; ?></td>
             <td><?= $movie['note']; ?></td>
-            <td><?= $movie['synopsis']; ?></td>
             <td><a href="../films/afficher/<?= $movie['id'] ?>">Voir la fiche</a></td>
-            <td><a href="../films/editer/<?= $movie['id'] ?>" >Modifier la fiche du film</a></td>
-            <td><a href="../films/supprimer/<?= $movie['id'] ?>" onclick="return confirm('êtes-vous sûr de vouloir supprimer cette fichee ?')">Supprimer la fiche du film</a> </td>
+            <td><a href="../films/editer/<?= $movie['id'] ?>" >Modifier</a></td>
+            <td><a href="../films/supprimer/<?= $movie['id'] ?>" onclick="return confirm('êtes-vous sûr de vouloir supprimer cette fichee ?')">Supprimer</a> </td>
         </tr>
         <?php endforeach; ?>
     </tbody>
