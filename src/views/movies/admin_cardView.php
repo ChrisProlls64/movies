@@ -13,7 +13,7 @@
       <?php  ?>
         <h5 class="card-title"><?= $movie['title'] ?></h5>
         <p class="card-text"><small class="text-body-secondary">Durée : <?= $movie['duration']; ?> | Date de sortie : <?= $movie['releaseDate']; ?></small></p>
-        <p class="card-text"><small class="text-body-secondary">Réalisateur : <?= $movie['director']; ?> | Catégories : <?= $movie['categories']; ?></small></p>
+        <p class="card-text"><small class="text-body-secondary">Réalisateur : <?= $movie['director']; ?> | Catégories : </small></p>
         <p class="card-text"><?= $movie['synopsis']; ?></p>
         <p class="card-text"><small class="text-body-secondary">Fiche mise à jour le <?= date($movie['updated']); ?></small></p>
       </div>
@@ -23,5 +23,5 @@
 
 
 <!-- if (!empty($_GET['id']) && !empty(getAlreadyExistId()->id)) {
-    displayMovies();
+    retrieveAllMovies();
 } -->

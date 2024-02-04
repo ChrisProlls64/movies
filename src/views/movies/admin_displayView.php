@@ -16,7 +16,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php $movies = displayMovies() ; ?>
+        <?php $movies = retrieveAllMovies() ; ?>
         <?php foreach ($movies as $movie) : ?>
         <tr>
             <th scope="row"><?= $movie['title'];?></th>
@@ -25,7 +25,6 @@
             <td><?= $movie['releaseDate']; ?></td>
             <td><?= $movie['director']; ?></td>
             <td><?= $movie['poster']; ?></td>
-            <td><?= $movie['categories']; ?></td>
             <td><?= $movie['note']; ?></td>
             <td><a href="../films/afficher/<?= $movie['id'] ?>">Voir la fiche</a></td>
             <td><a href="../films/editer/<?= $movie['id'] ?>" >Modifier</a></td>

@@ -1,6 +1,6 @@
 <?php
 
-function displayMovies() 
+function retrieveAllMovies() 
 {
     global $db;
     $sql = 'SELECT * FROM movie';
@@ -11,4 +11,3 @@ function displayMovies()
 }
 
 // dump($_SESSION);
-// dump(displayMovies()) ;
