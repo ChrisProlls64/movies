@@ -9,13 +9,13 @@
     <div class="col-md-8">
       <div class="card-body">
       <?php $movieId = $_GET['id']; ?>
-      <?php $movie = displayCard(); ?>
+      <?php $movie = retrieveMovie($movieId); ?>
       <?php  ?>
-        <h5 class="card-title"><?= $movie[0]['title'] ?></h5>
-        <p class="card-text"><small class="text-body-secondary">Durée : <?= $movie[0]['duration']; ?> | Date de sortie : <?= $movie[0]['releaseDate']; ?></small></p>
-        <p class="card-text"><small class="text-body-secondary">Réalisateur : <?= $movie[0]['director']; ?> | Catégories : <?= $movie[0]['categories']; ?></small></p>
-        <p class="card-text"><?= $movie[0]['synopsis']; ?></p>
-        <p class="card-text"><small class="text-body-secondary">Fiche mise à jour le <?= date($movie[0]['updated']); ?></small></p>
+        <h5 class="card-title"><?= $movie['title'] ?></h5>
+        <p class="card-text"><small class="text-body-secondary">Durée : <?= $movie['duration']; ?> | Date de sortie : <?= $movie['releaseDate']; ?></small></p>
+        <p class="card-text"><small class="text-body-secondary">Réalisateur : <?= $movie['director']; ?> | Catégories : <?= $movie['categories']; ?></small></p>
+        <p class="card-text"><?= $movie['synopsis']; ?></p>
+        <p class="card-text"><small class="text-body-secondary">Fiche mise à jour le <?= date($movie['updated']); ?></small></p>
       </div>
     </div>
   </div>

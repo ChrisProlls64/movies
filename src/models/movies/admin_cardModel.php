@@ -1,14 +1,14 @@
 <?php 
 
-function displayCard() 
+function retrieveMovie($id) 
 {
     global $db;
     $sql = 'SELECT * FROM movie WHERE id = :id';
     $query = $db->prepare($sql);
-    $query->bindParam(':id', $_GET['id']);
+    $query->bindParam(':id', $id);
     $query->execute();
-    return $query->fetchall(PDO::FETCH_ASSOC);
+    return $query->fetchall(PDO::FETCH_ASSOC)[0];
 
 }
-dump(displayCard());
+dump(retrieveMovie($_GET['id']));
 print_r($_FILES);
