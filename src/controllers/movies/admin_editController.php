@@ -23,11 +23,11 @@ $errorMessages['releaseDate'] = checkDateFieldAndGetErrorMessage('releaseDate');
 $errorMessages['duration'] = checkDurationFieldAndGetErrorMessage('duration');
 $errorMessages['director'] = checkTextFieldAndGetErrorMessage('director', 255);
 $errorMessages['poster'] = checkImageFieldAndGetErrorMessage('poster', './images/poster');  // ====>> À REVOIR (paramètres)
-$errorMessages['categories'] = checkTextFieldAndGetErrorMessage('categories', 100);
+// $errorMessages['categories'] = checkTextFieldAndGetErrorMessage('categories', 100);
 $errorMessages['note'] = checkTextFieldAndGetErrorMessage('note', 100);   // ====>> À REVOIR (note comprise entre 0 et 5)
 $errorMessages['synopsis'] = checkTextFieldAndGetErrorMessage('synopsis', 1000);
 $errorMessages['trailer'] = checkIframeFieldAndGetErrorMessage('trailer', 500);
-$errorMessages['imgSlider'] = checkImageFieldAndGetErrorMessage('synopsis', './images/slider');
+// $errorMessages['imgSlider'] = checkImageFieldAndGetErrorMessage('synopsis', './images/slider');
 
 // dump($errorMessages);
 
@@ -37,7 +37,8 @@ $errorMessages['imgSlider'] = checkImageFieldAndGetErrorMessage('synopsis', './i
 if (!empty($_POST)) {
     if (array_filter($errorMessages)) {
         if (empty($_GET['id'])) {
-            addMovie();
+            $movieId = createMovie();
+            addCategoriesToMovie($movieId);
         } else {
         updateMovie();
         } 

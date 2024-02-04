@@ -15,6 +15,7 @@ session_start();
 
 require SRC . 'config/database.php';
 require SRC . 'includes/forms.php';
+require SRC . 'includes/categoriesHelper.php';
 
 
 $router = new AltoRouter();

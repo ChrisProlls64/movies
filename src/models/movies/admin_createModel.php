@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }
 
-function addMovie(): bool
+function createMovie() : string
 {
     global $db;
     global $router;
@@ -20,13 +20,12 @@ function addMovie(): bool
         'duration' => $_POST['duration'],
         'director' => $_POST['director'],
         'poster' => renameFile($_POST['title']) . '.' . pathinfo($_FILES['poster']['name'], PATHINFO_EXTENSION),
-        'categories' => $_POST['categories'],
         'note' => $_POST['note'],
         'synopsis' => $_POST['synopsis'],
         'trailer' => $_POST['trailer']
     ];
     try {
-        $sql = "INSERT INTO movie (title, slug, releaseDate, duration, director, poster, categories, note, synopsis, trailer ) VALUES (:title, :slug, :releaseDate, :duration, :director, :poster, :categories, :note, :synopsis, :trailer)";
+        $sql = "INSERT INTO movie (title, slug, releaseDate, duration, director, poster, note, synopsis, trailer ) VALUES (:title, :slug, :releaseDate, :duration, :director, :poster, :note, :synopsis, :trailer)";
         $query = $db->prepare($sql);
         $query->execute($data);
         // dump($_FILES);
@@ -59,13 +58,12 @@ function updateMovie()
         'duration' => $_POST['duration'],
         'director' => $_POST['director'],
         'poster' => renameFile($_POST['title']) . '.' . pathinfo($_FILES['poster']['name'], PATHINFO_EXTENSION),
-        'categories' => $_POST['categories'],
         'note' => $_POST['note'],
         'synopsis' => $_POST['synopsis'],
         'trailer' => $_POST['trailer']
     ];
     try { //À finir
-        $sql = "UPDATE movie (title, slug, releaseDate, duration, director, poster, categories, note, synopsis, trailer ) VALUES (:title, :slug, :releaseDate, :duration, :director, :poster, :categories, :note, :synopsis, :trailer)";
+        $sql = "UPDATE movie (title, slug, releaseDate, duration, director, poster, note, synopsis, trailer ) VALUES (:title, :slug, :releaseDate, :duration, :director, :poster, :note, :synopsis, :trailer)";
         $query = $db->prepare($sql);
         $query->execute($data);
         alert('Film modifié correctement');

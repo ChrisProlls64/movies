@@ -53,7 +53,7 @@ if (!empty($_POST)) {
         !$errorMessages['synopsis'] ||
         !$errorMessages['trailer']) 
         {
-            addMovie();
+            createMovie();
         } else {
             alert('Erreur lors de l\'ajout du film.');
         }

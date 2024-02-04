@@ -18,6 +18,7 @@
     <tbody>
         <?php $movies = retrieveAllMovies() ; ?>
         <?php foreach ($movies as $movie) : ?>
+        <?php $categories = retrieveAllCategoriesForMovie($movie['id']) ?>
         <tr>
             <th scope="row"><?= $movie['title'];?></th>
             <th scope="row"><?= $movie['id'];?></th>
@@ -25,12 +26,19 @@
             <td><?= $movie['releaseDate']; ?></td>
             <td><?= $movie['director']; ?></td>
             <td><?= $movie['poster']; ?></td>
+            <td>
+                <?php foreach ($categories as $category) : ?>
+                <?= $category['name']; ?>
+                <?php endforeach; ?>
+            </td>
             <td><?= $movie['note']; ?></td>
             <td><a href="../films/afficher/<?= $movie['id'] ?>">Voir la fiche</a></td>
             <td><a href="../films/editer/<?= $movie['id'] ?>" >Modifier</a></td>
             <td><a href="../films/supprimer/<?= $movie['id'] ?>" onclick="return confirm('êtes-vous sûr de vouloir supprimer cette fichee ?')">Supprimer</a> </td>
         </tr>
         <?php endforeach; ?>
+
+
     </tbody>
 </table>
 

@@ -2,7 +2,7 @@
 // dump($_GET['id']);
 // dump($_FILES);
 
-/*Update a movie in the database*/ 
+/*Update a movie in the database*/
 function updateMovie()
 {
     global $db;
@@ -15,7 +15,6 @@ function updateMovie()
         'releaseDate' => $_POST['releaseDate'],
         'duration' => $_POST['duration'],
         'director' => $_POST['director'],
-        'categories' => $_POST['categories'],
         'note' => $_POST['note'],
         'synopsis' => $_POST['synopsis'],
         'trailer' => $_POST['trailer'],
@@ -32,7 +31,6 @@ function updateMovie()
             duration = :duration, 
             director = :director, 
             poster = :poster, 
-            categories = :categories, 
             note = :note, 
             synopsis = :synopsis, 
             trailer = :trailer, 
@@ -48,7 +46,6 @@ function updateMovie()
             releaseDate = :releaseDate, 
             duration = :duration, 
             director = :director, 
-            categories = :categories, 
             note = :note, 
             synopsis = :synopsis, 
             trailer = :trailer,
@@ -57,9 +54,9 @@ function updateMovie()
     }
 
     try { //À finir
-        
+
         $query = $db->prepare($sql);
-        $query->execute($data);  
+        $query->execute($data);
         alert('Film modifié avec succès', 'success');
         displayAlert();
         header('Location:' . $router->generate('indexMovies'));
@@ -71,7 +68,12 @@ function updateMovie()
     return true;
 }
 
-function addMovie(): bool
+/**
+ * Add the movie informations in the db
+ * @return string $db->lastInsertId The id of the movie just inserted in the db
+ */
+
+function createMovie(): string
 {
     global $db;
     global $router;
@@ -82,19 +84,17 @@ function addMovie(): bool
         'duration' => $_POST['duration'],
         'director' => $_POST['director'],
         'poster' => renameFile($_POST['title']) . '.' . pathinfo($_FILES['poster']['name'], PATHINFO_EXTENSION),
-        'categories' => $_POST['categories'],
         'note' => $_POST['note'],
         'synopsis' => $_POST['synopsis'],
         'trailer' => $_POST['trailer'],
-        'slider' => $_POST['slider'],
-        'imgSlider' => renameFile($_POST['title']) . '-slider.' . pathinfo($_FILES['imgSlider']['name'], PATHINFO_EXTENSION)
+        'slider' => 0, //$_POST['slider'],
+        'imgSlider' => 'toto' //renameFile($_POST['title']) . '-slider.' . pathinfo($_FILES['imgSlider']['name'], PATHINFO_EXTENSION)
     ];
     try {
-        $sql = "INSERT INTO movie (title, slug, releaseDate, duration, director, poster, categories, note, synopsis, trailer, slider, imgSlider) 
-        VALUES (:title, :slug, :releaseDate, :duration, :director, :poster, :categories, :note, :synopsis, :trailer, :slider, :imgSlider)";
+        $sql = "INSERT INTO movie (title, slug, releaseDate, duration, director, poster, note, synopsis, trailer, slider, imgSlider) 
+        VALUES (:title, :slug, :releaseDate, :duration, :director, :poster, :note, :synopsis, :trailer, :slider, :imgSlider)";
         $query = $db->prepare($sql);
         $query->execute($data);
-        // dump($_FILES);
         uploadFile('./images/poster', 'poster', $_POST['title']);
         uploadFile('./images/slider', 'slider', $_POST['title']);
         alert('Film ajouté correctement', 'success');
@@ -104,9 +104,42 @@ function addMovie(): bool
         dump($e->getMessage());
         die;
     }
-    // dump($_SESSION);
-    return true;
+    dump($db->lastInsertId());
+    return $db->lastInsertId();
 }
+
+
+/**
+ * Associates the movie id and the category id in the db
+ * @param string $movieId
+ * @return void
+ */
+
+function addCategoriesToMovie(string $movieId) : void
+{
+    global $db;
+    global $router;
+
+    $categories = $_POST['categories'];
+    foreach ($categories as $categoryId) {
+        $data = [
+            'movie_id' => $movieId,
+            'category_id' => intval($categoryId)
+        ];
+        try {
+            $sql = "INSERT INTO movie_category (movie_id, category_id) 
+                    VALUES (:movie_id, :category_id)";
+            $query = $db->prepare($sql);
+            $query->execute($data);
+        } catch (PDOException $e) {
+            dump($e->getMessage());
+            die;
+        }
+    }
+}
+
+
+
 
 /**
  * Check the id of the movie in the url and return the content of the movie infos if it already exists
@@ -115,10 +148,10 @@ function addMovie(): bool
 function retrieveMovieInfos()
 {
     global $db;
-    
+
     if (!empty($_GET['id'])) {
         $id = $_GET['id'];
-        $data = [ 'id' => $id];
+        $data = ['id' => $id];
         try {
             $sql = "SELECT * FROM movie WHERE id = :id";
             $query = $db->prepare($sql);

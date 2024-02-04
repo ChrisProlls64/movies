@@ -36,12 +36,20 @@
             <label for="poster">Affiche</label>
             <?= $errorMessages['poster']; ?>
         </div>
-        <div class="form-floating mb-2">
+        <legend>Catégories</legend>
+        <div class="btn-group mb-3" role="group" aria-label="Catégories du film">
+            <!-- <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btncheck1">Checkbox 1</label> -->
             <?php $class = (isset($errorMessages['categories'])) ? 'is-invalid' : ''; ?>
-            <input name="categories" type="text" class="form-control <?= $error['class']; ?>" value="<?= getValue('categories'); ?>" id="categories" placeholder="Catégorie">
-            <label for="categories">Catégories</label>
-            <?= $errorMessages['categories']; ?>
+            <?php $categories = retrieveAllCategories(); ?>
+            <?php foreach ($categories as $category) : { ?>
+                    <input name="categories[]" type="checkbox" class="form-control <?= $error['class']; ?> btn-check" id="<?= $category['id'] ?>" value="<?= $category['id'] ?>" autocomplete="off">
+                    <label for="<?= $category['id'] ?>" class="btn btn-outline-primary"><?= $category['name'] ?></label>
+            <?php }
+            endforeach; ?>
+
         </div>
+        <?= $errorMessages['categories']; ?>
         <div class="form-floating mb-2">
             <?php $class = (isset($errorMessages['note'])) ? 'is-invalid' : ''; ?>
             <input name="note" type="number" min="0" max="5" step="0.1" class="form-control <?= $error['class']; ?>" value="<?= getValue('note'); ?>" id="note" placeholder="Note">
@@ -74,8 +82,9 @@
 
         <button class="btn btn-primary w-100 py-2" type="submit">Créer</button>
     </form>
+</div>
 
 
 
 
-    <?php get_footer('admin'); ?>
+<?php get_footer('admin'); ?>
