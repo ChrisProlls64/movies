@@ -95,6 +95,7 @@ function checkTextFieldAndGetErrorMessage($field, int $size): ?string
     return null;
 }
 
+
 /**
  *Check if the code in the field doesn't contain any script tag
  *@param  

@@ -56,15 +56,26 @@
         </div>
         <div class="form-floating mb-2">
             <?php $class = (isset($errorMessages['trailer'])) ? 'is-invalid' : ''; ?>
-            <input name="trailer" type="text" class="form-control <?= $error['class']; ?>" value="<?= getValue('trailer'); ?>" id="trailer" placeholder="Lien vers la bande annonce">
+            <input name="trailer" type="text" class="form-control <?= $error['class']; ?>" value="<?= htmlentities(getValue('trailer')); ?>" id="trailer" placeholder="Lien vers la bande annonce">
             <label for="trailer">Bande annonce</label>
             <?= $errorMessages['synopsis']; ?>
         </div>
+        <div class="form-check form-switch">
+            <input name="slider" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked value="1">
+            <label for="slider" class="form-check-label" for="flexSwitchCheckChecked">Mettre le film à la une</label>
+        </div>
+        <div class="form-floating mb-2">
+
+            <input name="slider" type="file" class="form-control <?= $error['class']; ?>" value="<?= getValue('slider'); ?>" id="slider" placeholder="Image à la une">
+            <label for="slider">Image à la une</label>
+
+        </div>
+
 
         <button class="btn btn-primary w-100 py-2" type="submit">Créer</button>
     </form>
 
- 
 
 
-<?php get_footer('admin'); ?>
+
+    <?php get_footer('admin'); ?>

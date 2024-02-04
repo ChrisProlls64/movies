@@ -18,11 +18,13 @@ function updateMovie()
         'categories' => $_POST['categories'],
         'note' => $_POST['note'],
         'synopsis' => $_POST['synopsis'],
-        'trailer' => $_POST['trailer']
+        'trailer' => $_POST['trailer'],
+        'slider' => $_POST['slider'],
     ];
 
-    if (!empty($_FILES['poster']['name'])) {
+    if (!empty($_FILES['poster']['name']) && !empty($_FILES['imgSlider']['name'])) {
         $data['poster'] = renameFile($_POST['title']) . '.' . pathinfo($_FILES['poster']['name'], PATHINFO_EXTENSION);
+        $data['imgSlider'] = renameFile($_POST['title']) . '-slider.' . pathinfo($_FILES['imgSlider']['name'], PATHINFO_EXTENSION);
         $sql = $sql = "UPDATE movie 
         SET title = :title, 
             slug = :slug, 
@@ -33,9 +35,12 @@ function updateMovie()
             categories = :categories, 
             note = :note, 
             synopsis = :synopsis, 
-            trailer = :trailer 
+            trailer = :trailer, 
+            slider = :slider, 
+            imgSlider = :imgSlider 
         WHERE id = :id";
         uploadFile('./images/poster', 'poster', $_POST['title']);
+        uploadFile('./images/slider', 'imgSlider', $_POST['title']) . '-slider';
     } else {
         $sql = "UPDATE movie 
         SET title = :title, 
@@ -46,7 +51,8 @@ function updateMovie()
             categories = :categories, 
             note = :note, 
             synopsis = :synopsis, 
-            trailer = :trailer 
+            trailer = :trailer,
+            slider = :slider 
         WHERE id = :id";
     }
 
@@ -79,14 +85,18 @@ function addMovie(): bool
         'categories' => $_POST['categories'],
         'note' => $_POST['note'],
         'synopsis' => $_POST['synopsis'],
-        'trailer' => $_POST['trailer']
+        'trailer' => $_POST['trailer'],
+        'slider' => $_POST['slider'],
+        'imgSlider' => renameFile($_POST['title']) . '-slider.' . pathinfo($_FILES['imgSlider']['name'], PATHINFO_EXTENSION)
     ];
     try {
-        $sql = "INSERT INTO movie (title, slug, releaseDate, duration, director, poster, categories, note, synopsis, trailer ) VALUES (:title, :slug, :releaseDate, :duration, :director, :poster, :categories, :note, :synopsis, :trailer)";
+        $sql = "INSERT INTO movie (title, slug, releaseDate, duration, director, poster, categories, note, synopsis, trailer, slider, imgSlider) 
+        VALUES (:title, :slug, :releaseDate, :duration, :director, :poster, :categories, :note, :synopsis, :trailer, :slider, :imgSlider)";
         $query = $db->prepare($sql);
         $query->execute($data);
         // dump($_FILES);
         uploadFile('./images/poster', 'poster', $_POST['title']);
+        uploadFile('./images/slider', 'slider', $_POST['title']);
         alert('Film ajouté correctement', 'success');
         displayAlert();
         header('Location:' . $router->generate('indexMovies'));

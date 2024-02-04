@@ -11,7 +11,9 @@ $errorMessages = [
     'categories' => null,
     'note' => null,
     'synopsis' => null,
-    'trailer' => null
+    'trailer' => null,
+    'slider' => null,
+    'imgSlider' => null
 ];
 
 // Check error messages for every field and displays it in error style
@@ -25,6 +27,7 @@ $errorMessages['categories'] = checkTextFieldAndGetErrorMessage('categories', 10
 $errorMessages['note'] = checkTextFieldAndGetErrorMessage('note', 100);   // ====>> À REVOIR (note comprise entre 0 et 5)
 $errorMessages['synopsis'] = checkTextFieldAndGetErrorMessage('synopsis', 1000);
 $errorMessages['trailer'] = checkIframeFieldAndGetErrorMessage('trailer', 500);
+$errorMessages['imgSlider'] = checkImageFieldAndGetErrorMessage('synopsis', './images/slider');
 
 // dump($errorMessages);
 
@@ -32,7 +35,7 @@ $errorMessages['trailer'] = checkIframeFieldAndGetErrorMessage('trailer', 500);
 //Add or update the movies informations
 
 if (!empty($_POST)) {
-    if ((count(array_filter($errorMessages)) === 0)) {
+    if (array_filter($errorMessages)) {
         if (empty($_GET['id'])) {
             addMovie();
         } else {
