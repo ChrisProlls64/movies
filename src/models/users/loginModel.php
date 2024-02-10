@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 
  * 
@@ -10,10 +11,13 @@ function checkUserAccess()
     $query = $db->prepare($sql);
     $query->execute(['email' => $_POST['email']]);
     $user = $query->fetch();
-    if (password_verify($_POST['pwd'], $user->pwd)) {
-        return $user->id;
-    } else if ($user->pwd === false){
-        return false;
+    dump($user);
+    if (!empty($_POST['pwd'])) {
+        if (password_verify($_POST['pwd'], $user->pwd) === false) {
+            return false;
+        } else {
+            return $user->id;
+        }
     }
 }
 
@@ -22,11 +26,10 @@ function checkUserAccess()
  * 
  */
 
-function saveLastLogin(string $userId) 
+function saveLastLogin(string $userId)
 {
     global $db;
     $sql = 'UPDATE users SET lastLogin = NOW() WHERE id = :id';
     $query = $db->prepare($sql);
     $query->execute(['id' => $userId]);
-
 }

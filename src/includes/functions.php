@@ -132,8 +132,6 @@ function limitLoginAttempts(int $maxAttempts, int $periodeRateLimit): void
             $_SESSION['loginAttempts'][$adresseIP] = 1;
             $_SESSION['timestamp'][$adresseIP] = time();
         }
-        // dump($_SESSION);
-        // dump($adresseIP);
     }
 }
 
