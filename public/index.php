@@ -11,6 +11,7 @@ $dotenv->load();
 //déclarer l'initialisation de la session avant toute utilisation de session
 
 session_start();
+// session_unset();
 
 
 require SRC . 'config/database.php';

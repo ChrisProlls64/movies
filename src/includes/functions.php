@@ -106,7 +106,7 @@ function logoutTimer()
  * @return void
  */
 
-function limitLoginAttempts(int $maxAttempts, int $periodeRateLimit) : void
+function limitLoginAttempts(int $maxAttempts, int $periodeRateLimit): void
 {
     global $router;
     // Récupération de l'IP de l'utilisateur
@@ -119,20 +119,23 @@ function limitLoginAttempts(int $maxAttempts, int $periodeRateLimit) : void
         $_SESSION['loginAttempts'][$adresseIP]++;
     }
 
-    // Check si le nombre de tentatives dépasse le seuil À revoir
-    if ($_SESSION['loginAttempts'][$adresseIP] > $maxAttempts && time() - $_SESSION['timestamp'][$adresseIP] < $periodeRateLimit) {
-        // alert('Trop de tentatives de connexion. Veuillez réessayer plus tard.');
-        // header('Location: ' . $router->generate('home'));
-        // die;
-    }
+    if (isset($_SESSION['timestamp'])) {
+        // Check si le nombre de tentatives dépasse le seuil À revoir
+        if ($_SESSION['loginAttempts'][$adresseIP] > $maxAttempts && time() - $_SESSION['timestamp'][$adresseIP] < $periodeRateLimit) {
+            alert('Trop de tentatives de connexion. Veuillez réessayer plus tard.');
+            header('Location: ' . $router->generate('home'));
+            die;
+        }
 
-    // Réinitialiser le compteur après la période définie
-    if (time() - $_SESSION['timestamp'][$adresseIP] > $periodeRateLimit) {
-        $_SESSION['loginAttempts'][$adresseIP] = 1;
-        $_SESSION['timestamp'][$adresseIP] = time();
+        // Réinitialiser le compteur après la période définie
+        if (time() - $_SESSION['timestamp'][$adresseIP] > $periodeRateLimit) {
+            $_SESSION['loginAttempts'][$adresseIP] = 1;
+            $_SESSION['timestamp'][$adresseIP] = time();
+        }
+        // dump($_SESSION);
+        // dump($adresseIP);
     }
-    // dump($_SESSION);
-    // dump($adresseIP);
 }
 
 limitLoginAttempts(5, 3600);
+// dump($_SESSION);
