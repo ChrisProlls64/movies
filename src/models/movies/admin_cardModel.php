@@ -1,6 +1,12 @@
 <?php 
 
-function retrieveMovie($id) 
+/**
+ * Returns all the informations of a movie by getting its id
+ * @param int $id
+ * @return array
+ */
+
+function retrieveMovie($id) : array 
 {
     global $db;
     $sql = 'SELECT * FROM movie WHERE id = :id';
@@ -10,5 +16,15 @@ function retrieveMovie($id)
     return $query->fetchall(PDO::FETCH_ASSOC)[0];
 
 }
-dump(retrieveMovie($_GET['id']));
-print_r($_FILES);
+
+/**
+ * Returns all the informations of a movie along with its categories names
+ */
+function retrieveMovieWithCategoriesNames($id) : array 
+{
+    $movie = retrieveMovie($id);
+    $names = retrieveAllCategoriesNamesForMovie($id);
+    $movie['categoryNames'] = $names;
+    return $movie;
+
+}

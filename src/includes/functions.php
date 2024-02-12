@@ -62,78 +62,41 @@ function displayAlert(): void
  * @param array $match The match array from AltoRouter
  */
 
-function checkAdmin(array $match, altoRouter $router)
-{
-    // dump($_SESSION);
-
-    $existAdmin = strpos($match['target'], 'admin_');
-    if ($existAdmin !== false && empty($_SESSION['user']['id'])) {
-        header('Location: ' . $router->generate('login'));
-        die;
-    }
-}
-
-
-/**
- * Déconnecte après un certain temps d'inactivité
- */
-
-function logoutTimer()
-{
-    global $router;
-
-    if (!empty($_SESSION['user']['lastLogin'])) {
-        $expireHour = 4;
-
-        $now = new DateTime();
-        $now->setTimezone(new DateTimeZone('Europe/Paris'));
-
-        $lastLogin = new DateTime($_SESSION['user']['lastLogin']);
-
-        if ($now->diff($lastLogin)->h >= $expireHour) {
-            unset($_SESSION['user']);
-            alert('Vous avez été déconnecté pour inactivité', 'danger');
-            header('Location: ' . $router->generate('login'));
-            die;
-        }
-    }
-}
-
-/**
- * Limiter le nombre de tentatives de connexion
- * @param int $maxAttempts / Nombre max. de tentatives autorisées
- * @param int $periodeRateLimit / Période sur laquelle les essais sont limités (en secondes)
- * @return void
- */
-
-function limitLoginAttempts(int $maxAttempts, int $periodeRateLimit): void
-{
-    global $router;
-    // Récupération de l'IP de l'utilisateur
-    $adresseIP = $_SERVER['REMOTE_ADDR'];
-
-    // Check si l'adresse IP a déjà tenté de soumettre le formulaire
-    if (!isset($_SESSION['loginAttempts'][$adresseIP])) {
-        $_SESSION['loginAttempts'][$adresseIP] = 1;
-    } else {
-        $_SESSION['loginAttempts'][$adresseIP]++;
-    }
-
-    if (isset($_SESSION['timestamp'])) {
-        // Check si le nombre de tentatives dépasse le seuil À revoir
-        if ($_SESSION['loginAttempts'][$adresseIP] > $maxAttempts && time() - $_SESSION['timestamp'][$adresseIP] < $periodeRateLimit) {
-            alert('Trop de tentatives de connexion. Veuillez réessayer plus tard.');
-            header('Location: ' . $router->generate('home'));
-            die;
-        }
-
-        // Réinitialiser le compteur après la période définie
-        if (time() - $_SESSION['timestamp'][$adresseIP] > $periodeRateLimit) {
-            $_SESSION['loginAttempts'][$adresseIP] = 1;
-            $_SESSION['timestamp'][$adresseIP] = time();
-        }
-    }
-}
-
-limitLoginAttempts(5, 3600);
+ function checkAdmin(array $match, altoRouter $router)
+ {
+     // dump($_SESSION);
+ 
+     $existAdmin = strpos($match['target'], 'admin_');
+     if ($existAdmin !== false && empty($_SESSION['user']['id'])) {
+         header('Location: ' . $router->generate('login'));
+         die;
+     }
+ }
+ 
+ 
+ /**
+  * Déconnecte après un certain temps d'inactivité
+  */
+ 
+ function logoutTimer()
+ {
+     global $router;
+ 
+     if (!empty($_SESSION['user']['lastLogin'])) {
+         $expireHour = 4;
+ 
+         $now = new DateTime();
+         $now->setTimezone(new DateTimeZone('Europe/Paris'));
+ 
+         $lastLogin = new DateTime($_SESSION['user']['lastLogin']);
+ 
+         if ($now->diff($lastLogin)->h >= $expireHour) {
+             unset($_SESSION['user']);
+             alert('Vous avez été déconnecté pour inactivité', 'danger');
+             header('Location: ' . $router->generate('login'));
+             die;
+         }
+     }
+ }
+ 
 // dump($_SESSION);

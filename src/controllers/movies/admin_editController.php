@@ -36,11 +36,8 @@ $errorMessages['trailer'] = checkIframeFieldAndGetErrorMessage('trailer', 500);
 
 if (!empty($_POST)) {
     if (array_filter($errorMessages)) {
-        if (empty($_GET['id'])) {
-            $movieId = createMovie();
-            addCategoriesToMovie($movieId);
-        } else {
-        updateMovie();
+        if (!empty($_GET['id'])) {
+            updateMovie();
         } 
     } else {
         alert('Merci de remplir tous les champs du formulaire');

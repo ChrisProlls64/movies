@@ -1,4 +1,4 @@
-<?php get_header('Modifier une fiche de film', 'admin'); ?>
+<?php get_header('Créer une fiche de film', 'admin'); ?>
 <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 
@@ -38,8 +38,6 @@
         </div>
         <legend>Catégories</legend>
         <div class="btn-group mb-3" role="group" aria-label="Catégories du film">
-            <!-- <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btncheck1">Checkbox 1</label> -->
             <?php $class = (isset($errorMessages['categories'])) ? 'is-invalid' : ''; ?>
             <?php $categories = retrieveAllCategories(); ?>
             <?php foreach ($categories as $category) : { ?>
@@ -80,7 +78,7 @@
         </div>
 
 
-        <button class="btn btn-primary w-100 py-2" type="submit">Modifier la fiche du film</button>
+        <button class="btn btn-primary w-100 py-2" type="submit">Créer</button>
     </form>
 </div>
 

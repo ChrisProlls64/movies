@@ -26,9 +26,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="http://localhost:8888/movies/admin/films">Créer une fiche de film</a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
-                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://localhost:8888/movies/admin/categories">Liste des catégories</a>
+                        </li>
                     </ul>
                     <div class="navbar-text">
                         <a href='<?= $router->generate('logout') ?>' class="btn btn-danger"> Deconnexion</a>

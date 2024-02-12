@@ -11,7 +11,6 @@ function checkUserAccess()
     $query = $db->prepare($sql);
     $query->execute(['email' => $_POST['email']]);
     $user = $query->fetch();
-    dump($user);
     if (!empty($_POST['pwd'])) {
         if (password_verify($_POST['pwd'], $user->pwd) === false) {
             return false;
