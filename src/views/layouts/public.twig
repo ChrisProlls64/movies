@@ -1,135 +1,190 @@
 <!DOCTYPE html>
 <html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ basePath() }}css/main.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ basePath() }}css/main.css" />
     <link rel="shortcut icon" type="image/png" href="./favicon.ico" />
+    <script
+      src="https://kit.fontawesome.com/d8b8b3c8ea.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://db.onlinewebfonts.com/c/502cf5d63e1bd546956a036c88f9920d?family=Arcane+Regular"
+      rel="stylesheet"
+    />
     <title>animascoop_logo</title>
-</head>
+  </head>
 
-<body>
-    <header id="header" class="wrapper" >
-        <div class="logo">
-            <a href="{{ basePath() }}"><img src="{{ basePath() }}images/animascoop_logo.png" alt="logo AnimaScoop"></a>
-        </div>
+  <body class="wrapper">
+    <header id="header">
+      <div class="logo">
+        <a href="{{ basePath() }}"
+          ><img
+            src="{{ basePath() }}images/animascoop_logo.png"
+            alt="logo AnimaScoop"
+        /></a>
+      </div>
 
-        <form class="search" method="get" action="search.php">
-                <label for="site-search" class="search-label"><input type="search" id="site-search" name="search" placeholder="Rechercher un film"></label>
-                <button type="submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
-                        <path id="Search" d="M23.733,22.624,17.2,16.1A8.618,8.618,0,1,0,16.1,17.2l6.529,6.529a.785.785,0,1,0,1.11-1.11ZM10.6,17.63A7.035,7.035,0,1,1,17.63,10.6,7.035,7.035,0,0,1,10.6,17.63Z" transform="translate(-1.963 -1.963)" fill="#999" />
-                    </svg>
-                </button>
-            </form>
- 
-            <div class="login">
-                <a class="config" href="{{ basePath() }}admin/connexion"><img class="round" src="{{ basePath() }}images/user_connexion.png" alt="picto_member"></a>
-                <a class="config round" href=""><img src="{{ basePath() }}images/mode-sombre.png" alt="mode sombre"></a>
-                <a class="config" href="index.php"> FR </a>
-                <a class="config round" href="help.php"><img src="{{ basePath() }}images/help.png" alt="help"></a>
-            </div>
-            
-        
-        <nav class="menu">
-            <ul>
-                <li><a href="{{ basePath() }}">Accueil</a></li>
-                <li><a href="{{ basePath() }}">Films</a></li>
-                <li><a href="{{ basePath() }}">Actualités</a></li>
-                <li><a href="{{ basePath() }}">Communauté</a></li>
-                <li><a href="{{ basePath() }}">Ludothèque</a></li>
-                <li><a href="{{ basePath() }}">E-shop</a></li>
-            </ul>
-        </nav>
+      <form class="search" method="get" action="search.php">
+        <label for="site-search" class="search-label"
+          ><input
+            type="search"
+            id="site-search"
+            name="search"
+            placeholder="Rechercher un film"
+        /></label>
+        <button type="submit">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 22 22"
+          >
+            <path
+              id="Search"
+              d="M23.733,22.624,17.2,16.1A8.618,8.618,0,1,0,16.1,17.2l6.529,6.529a.785.785,0,1,0,1.11-1.11ZM10.6,17.63A7.035,7.035,0,1,1,17.63,10.6,7.035,7.035,0,0,1,10.6,17.63Z"
+              transform="translate(-1.963 -1.963)"
+              fill="#999"
+            />
+          </svg>
+        </button>
+      </form>
 
-        <p class="ariane">Accueil > {{ basePath }} </p>
+      <div class="login">
+        <a class="config" href="{{ basePath() }}admin/connexion"
+          ><img
+            class="round"
+            src="{{ basePath() }}images/user_connexion.png"
+            alt="picto_member"
+        /></a>
+        <a class="config round" href=""
+          ><img src="{{ basePath() }}images/mode-sombre.png" alt="mode sombre"
+        /></a>
+        <a class="config" href="index.php"> FR </a>
+        <a class="config round" href="help.php"
+          ><img src="{{ basePath() }}images/help.png" alt="help"
+        /></a>
+      </div>
+
+      <nav class="menu">
+        <ul>
+          <li><a href="{{ basePath() }}">Accueil</a></li>
+          <li><a href="{{ basePath() }}">Films</a></li>
+          <li><a href="{{ basePath() }}">Actualités</a></li>
+          <li><a href="{{ basePath() }}">Communauté</a></li>
+          <li><a href="{{ basePath() }}">Ludothèque</a></li>
+          <li><a href="{{ basePath() }}">E-shop</a></li>
+        </ul>
+      </nav>
+    </header>
+    <p class="ariane">Accueil > {{ basePath }}</p>
 
     {% block content %}{% endblock %}
 
-   <footer>
-    <div id="top-footer">
+    <footer>
+      <div id="top-footer">
         <div class="wrap">
-            <div class="col">
-                <a href="">
-                    <img src="images/logo.png" alt="Logo">
-                </a>
-                <address>
-                    <a href="" >
-                        <img src="">
-                    </a>
-                    <p>AnimaScoop</p>
-                </address>
-            </div>
-            <div class="col">
-                <p class="title">Sitemap</p>
-                <nav>
-                    <ul>
-                        <li>
-                            <a href="">Home</a>
-                        </li>
-                        <li>
-                            <a href="">About us</a>
-                        </li>
-                        <li>
-                            <a href="">Shop</a>
-                        </li>
-                        <li>
-                            <a href="">Blog</a>
-                        </li>
-                        <li>
-                            <a href="">Contact</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="col">
-                <p class="title">Ressources</p>
-                <nav>
-                    <ul>
-                        <li>
-                            <a href="">Documentations</a>
-                        </li>
-                        <li>
-                            <a href="">Support</a>
-                        </li>
-                        <li>
-                            <a href="">Customer service</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="col">
-                <p class="title">Social media</p>
-                <ul id="social">
-                    <li>
-                        <a href="" title="Facebook" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-                    </li>
-                    <li>
-                        <a href="" title="Instagram" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li>
-                        <a href="" title="Youtube" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div id="bottom-footer">
-        <nav class="wrap">
-            <ul>
-                <li>
-                    <a href="">Terms and conditions</a>
-                </li>
-                <li>
-                    <a href="">Privacy policy</a>
-                </li>
-                <li>
-                    <a href="">Cookies policy</a>
-                </li>
+          <div class="col logo">
+            <a class="logo" href="{{ basePath() }}">
+              <img
+                src="{{ basePath() }}images/animascoop_logo.png"
+                alt="Logo Animascoop"
+              />
+            </a>
+            <p>Suivez-nous</p>
+            <ul id="social">
+              <li>
+                <a href="" title="Facebook" target="_blank"
+                  ><i class="fa-brands fa-facebook"></i
+                ></a>
+              </li>
+              <li>
+                <a href="" title="Instagram" target="_blank"
+                  ><i class="fa-brands fa-instagram"></i
+                ></a>
+              </li>
+              <li>
+                <a href="" title="Youtube" target="_blank"
+                  ><i class="fa-brands fa-youtube"></i
+                ></a>
+              </li>
             </ul>
+          </div>
+          <div class="col">
+            <p class="title">FILMS</p>
+            <nav>
+              <ul>
+                <li>
+                  <a href="">Par catégories</a>
+                </li>
+                <li>
+                  <a href="">Par Studio</a>
+                </li>
+                <li>
+                  <a href="">Bandes-annonces</a>
+                </li>
+                <li>
+                  <a href="">Classements</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="col">
+            <p class="title">Communauté</p>
+            <nav>
+              <ul>
+                <li>
+                  <a href="">Guide parental</a>
+                </li>
+                <li>
+                  <a href="">Offres d'emploi | Stages</a>
+                </li>
+                <li>
+                  <a href="">Écoles | Formations</a>
+                </li>
+                <li>
+                  <a href="">Portfolios</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="col">
+            <p class="title">Actus</p>
+            <nav>
+                <ul>
+                  <li>
+                    <a href="">Blog</a>
+                  </li>
+                  <li>
+                    <a href="">Podcasts</a>
+                  </li>
+                  <li>
+                    <a href="">Événements</a>
+                  </li>
+                  <li>
+                    <a href="">Portfolios</a>
+                  </li>
+                </ul>
+              </nav>
+          </div>
+        </div>
+      </div>
+      <div id="bottom-footer">
+        <nav class="wrap">
+          <ul>
+            <li>
+              <a href="">Terms and conditions</a>
+            </li>
+            <li>
+              <a href="">Privacy policy</a>
+            </li>
+            <li>
+              <a href="">Cookies policy</a>
+            </li>
+          </ul>
         </nav>
-    </div>
-</footer>
-</body>
+      </div>
+    </footer>
+  </body>
 </html>

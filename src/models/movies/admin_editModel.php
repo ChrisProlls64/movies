@@ -7,7 +7,7 @@
  * @return bool
  */
 
-function updateMovie() : bool
+function updateMovie(): bool
 {
     global $db;
     global $router;
@@ -28,7 +28,7 @@ function updateMovie() : bool
     if (!empty($_FILES['poster']['name']) && !empty($_FILES['imgSlider']['name'])) {
         $data['poster'] = renameFile($_POST['title']) . '.' . pathinfo($_FILES['poster']['name'], PATHINFO_EXTENSION);
         $data['imgSlider'] = renameFile($_POST['title']) . '-slider.' . pathinfo($_FILES['imgSlider']['name'], PATHINFO_EXTENSION);
-        $sql = $sql = "UPDATE movie 
+        $sql = "UPDATE movie 
         SET title = :title, 
             slug = :slug, 
             releaseDate = :releaseDate, 

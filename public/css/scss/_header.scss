@@ -1,3 +1,13 @@
+@font-face {
+    font-family: "Arcane Regular";
+    src: url("https://db.onlinewebfonts.com/t/502cf5d63e1bd546956a036c88f9920d.eot");
+    src: url("https://db.onlinewebfonts.com/t/502cf5d63e1bd546956a036c88f9920d.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/502cf5d63e1bd546956a036c88f9920d.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/502cf5d63e1bd546956a036c88f9920d.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/502cf5d63e1bd546956a036c88f9920d.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/502cf5d63e1bd546956a036c88f9920d.svg#Arcane Regular")format("svg");
+}
+
 header {
     max-width: 1200px;
     margin-left: auto;
@@ -7,7 +17,7 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-
+    background-color: rgba(255, 255, 255, 0.405);
     input[type="submit"] {
         @include button;
         background-color: var(--header);
@@ -34,7 +44,7 @@ a {
     flex-wrap: wrap;
     justify-content: flex-start;
     // justify-content: space-between;
-
+    
 }
 
 .menu li {
@@ -42,17 +52,27 @@ a {
     display: flex;
     flex-wrap: wrap;
     margin-right: 5%;
-
+    
 }
 
 .menu ul li a {
-    color : #fff;
+    color: var(--primary-color);
     text-decoration: none;
     text-transform: uppercase;
     text-align: center;
+    font-family: "Arcane Regular";
+    font-size: 1.5em;
+    letter-spacing: .2rem;
+	transition: .3s ease color;
     // display: flex;
     // flex-wrap: wrap;
 }
+
+.menu ul li a:hover,
+.menu ul li  a:focus {
+    color: #ff701d;
+}
+
 
 form.search {   
     margin-top: auto;
@@ -94,6 +114,8 @@ a.config.round {
 padding-bottom: 12px;
 
 }
+
+
 
 // .login .round {
 //     // margin-top: 10px;

@@ -1,8 +1,16 @@
+@font-face {
+    font-family: 'Arcane';
+    src: url('/public/fonts/Arcane.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 //colors
 :root {
     --primary-color: #FFF;
     --active-color: #353535;
+    --third-color: #E0E4E5;
+    --tonic-color: #ff701d;
     --background-color: #;
     --default-color: #;
     --default-font: arial;
@@ -14,10 +22,13 @@ a {
 }
 
 // imports
+@import url(https://db.onlinewebfonts.com/c/502cf5d63e1bd546956a036c88f9920d?family=Arcane+Regular); 
 @import'_reset';
 @import'_mixins';
 @import'_default';
+@import'_detail';
 @import'_header';
+@import'_footer';
 
 
 
@@ -43,12 +54,6 @@ body {
     }
 }
 
-@font-face {
-    font-family: 'Arcane';
-    src: url('fonts/Arcane.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
 
 h1 {
     font-family: var(--title-font);
