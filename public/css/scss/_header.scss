@@ -96,24 +96,38 @@ form.search {
 
     a.config {
         color: var(--active-color);
-        height: 40px;
-        padding: 10px;
-        display: flex;
-        text-align: bottom;
+        width: 40px !important;
+        height: 30px;
+        // padding: 10px;
+        display: block;
+        text-align: center;
         // flex-wrap: wrap;
-        // align-items: center;
+        justify-content: center;
     }
-
-    .userpicto {
-        margin-right: 5px;
+    
+    img {
+        height: 30px;
     }
+    
+    a#language {
+        display: flex;
+        justify-content: center;
+        align-self: auto;
+        padding-top: 7px;
+    }
+    
+    // .userpicto {
+    //     width: 40px;
+    //     // margin-right: 5px;
+    // }
     
 }
 
-a.config.round {
-padding-bottom: 12px;
+// a.config.round {
+//     width: 40px;
+// // padding-bottom: 12px;
 
-}
+// }
 
 
 
