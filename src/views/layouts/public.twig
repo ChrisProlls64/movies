@@ -51,19 +51,23 @@
         </button>
       </form>
 
-      <div class="login">
+      <div class="options-header">
         <a class="config" href="{{ basePath() }}admin/connexion"
           ><img
-            
+            id="picto-admin"
             src="{{ basePath() }}images/user_connexion.svg"
             alt="picto_member"
         /></a>
         <a class="config" href=""
-          ><img src="{{ basePath() }}images/mode-sombre.svg" alt="mode sombre"
+          ><img 
+          id="picto-mode-sombre"
+          src="{{ basePath() }}images/mode-sombre.svg" alt="mode sombre"
         /></a>
-        <a class="config" id="language" href="index.php"> FR </a>
+        <a class="config" id="language" href="{{ basePath() }}"> FR </a>
         <a class="config" href="help.php"
-          ><img src="{{ basePath() }}images/help.svg" alt="help"
+          ><img 
+          id="picto-help"
+          src="{{ basePath() }}images/help.svg" alt="help"
         /></a>
       </div>
 
@@ -78,7 +82,9 @@
         </ul>
       </nav>
     </header>
-    <p class="ariane">Accueil > {{ basePath }}</p>
+    <div id="ariane">
+      <a href="{{ basePath() }}">Accueil > {{ basePath }}</a>
+    </div>
 
     {% block content %}{% endblock %}
 

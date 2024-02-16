@@ -13,12 +13,12 @@ $twig->addFunction(new Twig\twigFunction('basePath', function () {
 $twig->addfunction(new Twig\twigFunction('carrousel', function($path){
     $scandir = scandir($path);
     $images=[];
-    $Nbr=0;
+    $index=0;
     foreach($scandir as $cle => $fichier){
         $fichier=strtolower($fichier);
-        if(preg_match("#\.(jpg|jpeg|png|gif|bmp)$#",$fichier)){
-            $Nbr++;
-            $images[$Nbr]=$fichier;
+        if(preg_match("#\.(jpg|jpeg)$#",$fichier)){
+            $index++;
+            $images[$index]=$fichier;
           }
         }
         if(count($images)==0){
