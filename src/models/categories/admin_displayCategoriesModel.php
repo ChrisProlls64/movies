@@ -1,5 +1,11 @@
 <?php
-function addNewCategory($newCategory)
+
+/**
+ * Add new category into the table "categories" in the db 
+ * @param string $newCategory
+ */
+
+function addNewCategory($newCategory): void
 {
     global $db;
     $data = ['newCategory' => $newCategory];

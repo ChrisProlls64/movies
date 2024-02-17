@@ -34,7 +34,7 @@
             <td><?= $movie['note']; ?></td>
             <td><a href="../films/afficher/<?= $movie['id'] ?>">Voir la fiche</a></td>
             <td><a href="../films/editer/<?= $movie['id'] ?>" >Modifier</a></td>
-            <td><a class="link-danger" href="../films/supprimer/<?= $movie['id'] ?>" onclick="return confirm('êtes-vous sûr de vouloir supprimer cette fichee ?')">Supprimer</a> </td>
+            <td><a class="link-danger" href="../films/supprimer/<?= $movie['id'] ?>" onclick="return confirm('êtes-vous sûr de vouloir supprimer cette fiche ?')">Supprimer</a> </td>
         </tr>
         <?php endforeach; ?>
 
