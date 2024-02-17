@@ -57,20 +57,42 @@ function updateMovie(): bool
         WHERE id = :id";
     }
 
-    try { //À finir
-
+    try {
         $query = $db->prepare($sql);
         $query->execute($data);
         alert('Film modifié avec succès', 'success');
         displayAlert();
-        header('Location:' . $router->generate('indexMovies'));
     } catch (PDOException $e) {
         dump($e->getMessage());
         die;
     }
-
+    flushCategoriesForMovie($_GET['id']);
+    addCategoriesToMovie($_GET['id']);
+    header('Location:' . $router->generate('indexMovies'));
     return true;
 }
+
+/**
+ * Flushes the categories associated with the movie id in the db
+ * @param string $movieId
+ * @return void
+ */
+
+function flushCategoriesForMovie(string $movieId): void
+{
+    global $db;
+    try {
+        $sql = "DELETE FROM `movie_category` WHERE movie_id = :id";
+        $query = $db->prepare($sql);
+        $query->bindParam(':id', $_GET['id']);
+        $query->execute();
+    } catch (PDOException $e) {
+        dump($e->getMessage());
+        die;
+    }
+}
+
+
 
 /**
  * Retrieve the movie infos based on the id passed as parameter

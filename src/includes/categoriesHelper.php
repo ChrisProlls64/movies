@@ -78,3 +78,32 @@ function retrieveAllCategoriesNamesForMovie($movieId): array
     }
     return $names;
 }
+
+/**
+ * Associates the movie id and the categories id in the db
+ * @param string $movieId
+ * @return void
+ */
+
+ function addCategoriesToMovie(string $movieId): void
+ {
+     global $db;
+     global $router;
+ 
+     $categories = $_POST['categories'];
+     foreach ($categories as $categoryId) {
+         $data = [
+             'movie_id' => $movieId,
+             'category_id' => intval($categoryId)
+         ];
+         try {
+             $sql = "INSERT INTO movie_category (movie_id, category_id) 
+                      VALUES (:movie_id, :category_id)";
+             $query = $db->prepare($sql);
+             $query->execute($data);
+         } catch (PDOException $e) {
+             dump($e->getMessage());
+             die;
+         }
+     }
+ }

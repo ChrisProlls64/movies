@@ -7,8 +7,8 @@ $errorMessages = [
     'releaseDate' => null,
     'director' => null,
     'duration' => null,
-    // 'poster' => null,
-    'categories' => null,
+    'poster' => null,
+    // 'categories' => null,
     'note' => null,
     'synopsis' => null,
     'trailer' => null,
@@ -27,7 +27,7 @@ $errorMessages['poster'] = checkImageFieldAndGetErrorMessage('poster', './images
 $errorMessages['note'] = checkTextFieldAndGetErrorMessage('note', 100);   // ====>> À REVOIR (note comprise entre 0 et 5)
 $errorMessages['synopsis'] = checkTextFieldAndGetErrorMessage('synopsis', 1000);
 $errorMessages['trailer'] = checkIframeFieldAndGetErrorMessage('trailer', 500);
-// $errorMessages['imgSlider'] = checkImageFieldAndGetErrorMessage('synopsis', './images/slider');
+$errorMessages['imgSlider'] = checkImageFieldAndGetErrorMessage('synopsis', './images/slider');
 
 // dump($errorMessages);
 
