@@ -74,6 +74,7 @@ function updateMovie(): bool
 
 /**
  * Check the id of the movie in the url and return the content of the movie infos if it already exists
+ * 
  */
 
 function retrieveMovieInfos()

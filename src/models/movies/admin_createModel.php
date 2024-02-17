@@ -29,28 +29,28 @@ function createMovie(): string
         'trailer' => $_POST['trailer'],
         'slider' => $_POST['slider']
     ];
-    if ($_POST['slider'] == 0 && empty($_FILES['imgSlider'])) {
-        $sql = "INSERT INTO movie (title, slug, releaseDate, duration, director, poster, note, synopsis, trailer, slider) 
-         VALUES (:title, :slug, :releaseDate, :duration, :director, :poster, :note, :synopsis, :trailer, :slider)";
-    } else if ($_POST['slider'] == 1 && !empty($_FILES['imgSlider'])) {
+    if (!empty($_FILES['imgSlider'])) {
         $data = [
             'imgSlider' => renameFile($_POST['title']) . '-slider.' . pathinfo($_FILES['imgSlider']['name'], PATHINFO_EXTENSION)
         ];
         $sql = "INSERT INTO movie (title, slug, releaseDate, duration, director, poster, note, synopsis, trailer, slider, imgSlider) 
          VALUES (:title, :slug, :releaseDate, :duration, :director, :poster, :note, :synopsis, :trailer, :slider, :imgSlider)";
+    } else {
+        $sql = "INSERT INTO movie (title, slug, releaseDate, duration, director, poster, note, synopsis, trailer, slider) 
+         VALUES (:title, :slug, :releaseDate, :duration, :director, :poster, :note, :synopsis, :trailer, :slider)";
     }
     try {
         $query = $db->prepare($sql);
         $query->execute($data);
-        uploadFile('./images/poster', 'poster', $_POST['title']);
-        uploadFile('./images/slider', 'slider', $_POST['title']);
-        alert('Film ajouté correctement', 'success');
-        displayAlert();
-        header('Location:' . $router->generate('indexMovies'));
     } catch (PDOException $e) {
         dump($e->getMessage());
         die;
     }
+    uploadFile('./images/poster', 'poster', $_POST['title']);
+    uploadFile('./images/slider', 'slider', $_POST['title']);
+    alert('Film ajouté correctement', 'success');
+    displayAlert();
+    header('Location:' . $router->generate('indexMovies'));
     dump($db->lastInsertId());
     return $db->lastInsertId();
 }

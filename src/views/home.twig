@@ -5,6 +5,39 @@
 
 <div class="carrousel wrapper">
 <img src="images/slider/banner-a-la-une.jpg" alt="slider à la une">   
+<div class="carousel slide carousel-fade" data-ride="carousel">
+    {# Indicators #}
+    <ol class="carousel-indicators">
+        {% for image in images %}
+            {% if loop.first %}{% set active = 'active' %}{% else %}{% set active = '' %}{% endif %}
+            <li data-target="#carousel-{{ name }}" data-slide-to="{{ loop.index0 }}" class="{{ active }}"></li>
+        {% endfor %}
+    </ol>
+
+    {# Wrapper for slides #}
+    <div class="carousel-inner" role="listbox">
+        {% for image in images %}
+            {% if loop.first %}{% set active = 'active' %}{% else %}{% set active = '' %}{% endif %}
+            <div class="item {{ active }}">
+                <img src="images/slider/{{ image.filename }}" alt="{{ image.title }}">
+                <!-- div class="carousel-caption">{{ image.title }}</div -->
+            </div>
+        {% endfor %}
+    </div>
+    {# Controls #}
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <i class="fa fa-chevron-left"></i>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <i class="fa fa-chevron-right"></i>
+    </a>
+</div>
+
+
+</div>
+
+<div class="last-release">
+
 </div>
 
 <div id="home">
