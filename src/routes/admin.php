@@ -23,7 +23,7 @@ $router->map( 'GET|POST', $admin . '/films/editer/[i:id]', 'movies/admin_edit', 
 $router->map( 'GET', $admin . '/films/supprimer/[i:id]', 'movies/admin_delete', 'deleteMovie');
 
 //catégories
-$router->map( 'GET', $admin . '/categories', 'categories/admin_displayCategories', 'displayCategories');
+$router->map( 'GET|POST', $admin . '/categories', 'categories/admin_displayCategories', 'displayCategories');
 $router->map( 'GET', $admin . '/categories/editer/[i:id]', '');
 $router->map( 'GET', $admin . '/categories/supprimer/[i:id]', '');
 
