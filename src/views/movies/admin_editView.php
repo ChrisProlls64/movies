@@ -26,13 +26,12 @@
         </div>
         <div class="form-floating mb-2">
             <?php $class = (isset($errorMessages['duration'])) ? 'is-invalid' : ''; ?>
-            <input name="duration" type="time" class="form-control <?= $error['class']; ?>" id="duration" value="<?= getValue('duration'); ?>" placeholder="Durée du film">
+            <input name="duration" type="time" class="form-control <?= $class; ?>" id="duration" value="<?= getValue('duration'); ?>" placeholder="Durée du film">
             <label for="duration">Durée du film</label>
             <?= $errorMessages['duration']; ?>
         </div>
         <div class="form-floating mb-2">
-            <?php $class = (isset($errorMessages['poster'])) ? 'is-invalid' : ''; ?>
-            <input name="poster" type="file" class="form-control <?= $error['class']; ?>" value="<?= getValue('poster'); ?>" id="poster" placeholder="Lien vers l'affiche">
+            <input name="poster" type="file" class="form-control" value="<?= getValue('poster'); ?>" id="poster" placeholder="Lien vers l'affiche">
             <label for="poster">Affiche</label>
             <?= $errorMessages['poster']; ?>
         </div>
@@ -40,10 +39,10 @@
         <div class="btn-group mb-3" role="group" aria-label="Catégories du film">
             <!-- <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
             <label class="btn btn-outline-primary" for="btncheck1">Checkbox 1</label> -->
-            <?php $class = (isset($errorMessages['categories'])) ? 'is-invalid' : ''; ?>
-            <?php $categories = retrieveAllCategories(); ?>
+            <?php $categories = retrieveAllCategoriesWithMovieSelection(getValue('id')); ?>
             <?php foreach ($categories as $category) : { ?>
-                    <input name="categories[]" type="checkbox" class="form-control <?= $error['class']; ?> btn-check" id="<?= $category['id'] ?>" value="<?= $category['id'] ?>" autocomplete="off">
+                <?php $checked =  $category['checked'] === true ? 'checked' : ''; ?>
+                    <input name="categories[]" type="checkbox" class="form-control btn-check" <?= $checked ?> id="<?= $category['id'] ?>" value="<?= $category['id'] ?>" autocomplete="off">
                     <label for="<?= $category['id'] ?>" class="btn btn-outline-primary"><?= $category['name'] ?></label>
             <?php }
             endforeach; ?>

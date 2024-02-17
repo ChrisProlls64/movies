@@ -73,25 +73,25 @@ function updateMovie(): bool
 }
 
 /**
- * Check the id of the movie in the url and return the content of the movie infos if it already exists
- * 
+ * Retrieve the movie infos based on the id passed as parameter
+ * @param string $movieId
+ * @return array
  */
 
-function retrieveMovieInfos()
+function retrieveMovieInfos($movieId): array
 {
+    if (empty($movieId)) {
+        return [];
+    }
     global $db;
-
-    if (!empty($_GET['id'])) {
-        $id = $_GET['id'];
-        $data = ['id' => $id];
-        try {
-            $sql = "SELECT * FROM movie WHERE id = :id";
-            $query = $db->prepare($sql);
-            $query->execute($data);
-            $_POST = (array) $query->fetch();
-        } catch (PDOException $e) {
-            dump($e->getMessage());
-            die;
-        }
+    $data = ['id' => $movieId];
+    $sql = "SELECT * FROM movie WHERE id = :id";
+    $query = $db->prepare($sql);
+    try {
+        $query->execute($data);
+        return (array) $query->fetch();
+    } catch (PDOException $e) {
+        dump($e->getMessage());
+        die;
     }
 }

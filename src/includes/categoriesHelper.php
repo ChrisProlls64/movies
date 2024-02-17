@@ -4,7 +4,7 @@
  * Return all the categories existing in the db
  * @return array $result
  */
-function retrieveAllCategories() 
+function retrieveAllCategories(): array 
 {
     global $db;
     $sql = 'SELECT * FROM categories';
@@ -21,7 +21,7 @@ function retrieveAllCategories()
 }
 
 
-function retrieveAllCategoriesForMovie($movieId)
+function retrieveAllCategoriesForMovie($movieId): array
 {
     global $db;
     $sql = 'SELECT * 
@@ -40,7 +40,36 @@ function retrieveAllCategoriesForMovie($movieId)
     }
 }
 
-function retrieveAllCategoriesNamesForMovie($movieId) {
+
+function retrieveAllCategoriesWithMovieSelection($movieId): array 
+{
+    $allCategories = retrieveAllCategories();
+    $allCategoriesIdsForMovie = retrieveAllCategoriesIdsForMovie($movieId);
+    $result = [];
+    foreach ($allCategories as $category) {
+        $category['checked'] = in_array($category['id'], $allCategoriesIdsForMovie);
+        array_push($result, $category);
+    }
+    // dump($result);
+    return $result;
+
+}
+
+
+function retrieveAllCategoriesIdsForMovie($movieId): array
+{
+    $categories = retrieveAllCategoriesForMovie($movieId);
+    $ids = [];
+    foreach ($categories as $category) {
+        $id = $category['id'];
+        array_push($ids, $id);
+    }
+    return $ids;
+}
+
+
+function retrieveAllCategoriesNamesForMovie($movieId): array
+{
     $categories = retrieveAllCategoriesForMovie($movieId);
     $names = [];
     foreach ($categories as $category) {

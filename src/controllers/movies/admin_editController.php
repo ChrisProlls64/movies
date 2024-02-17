@@ -43,7 +43,7 @@ if (!empty($_POST)) {
         alert('Merci de remplir tous les champs du formulaire');
     }
 } else if (!empty($_GET['id'])) {
-    retrieveMovieInfos();
+    $_POST = retrieveMovieInfos($_GET['id']);
 }
 
 
