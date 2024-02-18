@@ -13,7 +13,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-dark mb-4" data-bs-theme="dark">
             <div class="container">
-                <a class="navbar-brand" href="#">Admin movies</a>
+                <a class="navbar-brand" href="http://localhost:8888/movies/admin/films">Admin movies</a>
                 <!-- pour le responsive, bootstrap affiche ça quand l'écran devient trop petit (menu hamburger) -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -21,13 +21,13 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="http://localhost:8888/movies/admin/films/afficher">Afficher les films</a>
+                            <a class="nav-link" aria-current="page" href="http://localhost:8888/movies/admin/films/afficher">Afficher la liste des films</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="http://localhost:8888/movies/admin/films">Créer une fiche de film</a>
+                            <a class="nav-link" aria-current="page" href="http://localhost:8888/movies/admin/films/nouveau">Créer une fiche de film</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="http://localhost:8888/movies/admin/categories">Liste des catégories</a>
+                            <a class="nav-link" aria-current="page" href="http://localhost:8888/movies/admin/categories">Liste des catégories</a>
                         </li>
                     </ul>
                     <div class="navbar-text">

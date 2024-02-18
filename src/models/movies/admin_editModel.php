@@ -25,7 +25,7 @@ function updateMovie(): bool
         'slider' => $_POST['slider'],
     ];
 
-    if (!empty($_FILES['poster']['name']) && !empty($_FILES['imgSlider']['name'])) {
+    if (!empty($_FILES['poster']['name']) || !empty($_FILES['imgSlider']['name'])) {
         $data['poster'] = renameFile($_POST['title']) . '.' . pathinfo($_FILES['poster']['name'], PATHINFO_EXTENSION);
         $data['imgSlider'] = renameFile($_POST['title']) . '-slider.' . pathinfo($_FILES['imgSlider']['name'], PATHINFO_EXTENSION);
         $sql = "UPDATE movie 
@@ -72,6 +72,8 @@ function updateMovie(): bool
     return true;
 }
 
+
+
 /**
  * Flushes the categories associated with the movie id in the db
  * @param string $movieId
@@ -117,3 +119,10 @@ function retrieveMovieInfos($movieId): array
         die;
     }
 }
+
+/**
+ * Update the poster or slider uploaded file
+ */
+// function updateUploadedFile($field) {
+
+// }

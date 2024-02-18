@@ -76,7 +76,7 @@ function retrieveAllCategoriesIdsForMovie($movieId): array
     $categoriesIds = [];
     foreach ($categories as $category) {
         $id = $category['id'];
-        array_push($ids, $id);
+        array_push($categoriesIds, $id);
     }
     return $categoriesIds;
 }
@@ -84,7 +84,7 @@ function retrieveAllCategoriesIdsForMovie($movieId): array
 /**
  * Returns an array of the categories names for a specific movie
  * @param string $movieId
- * @return array $names
+ * @return array $categoriesNames
  */
 function retrieveAllCategoriesNamesForMovie($movieId): array
 {
