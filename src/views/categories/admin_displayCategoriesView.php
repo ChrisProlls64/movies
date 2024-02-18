@@ -10,6 +10,7 @@
       <li class="list-group-item">
         <a class="link-danger" href="<?= $router->generate('deleteCategory', ['id' =>  htmlentities($category['id'])]); ?>" onclick="return confirm('êtes-vous sûr de vouloir supprimer cette catégorie ?')"><img id="bin" src="/movies/public/images/bin.svg" height="20"></a>
           <?= $category['name'] ?>
+          <span class="badge bg-primary rounded-pill">14</span>
       </li>
     <?php } ?>
   </ul>

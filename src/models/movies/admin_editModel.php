@@ -41,7 +41,7 @@ function updateMovie(): bool
             slider = :slider, 
             imgSlider = :imgSlider 
         WHERE id = :id";
-        uploadFile('./images/poster', 'poster', $_POST['title']);
+        resizeImage(uploadFile('./images/poster', 'poster', $_POST['title']), 500);
         uploadFile('./images/slider', 'imgSlider', $_POST['title']) . '-slider';
     } else {
         $sql = "UPDATE movie 

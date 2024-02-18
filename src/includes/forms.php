@@ -9,7 +9,6 @@ use Intervention\Image\Drivers\Gd\Driver;
  * @param string $message
  * @return array
  */
-
 function checkEmptyFields($field, $message = 'Veuillez renseigner tous les champs')
 {
     $result = [
@@ -30,7 +29,6 @@ function checkEmptyFields($field, $message = 'Veuillez renseigner tous les champ
  * Return value of the field 
  * @param string $field
  */
-
 function getValue($field)
 {
     if (isset($_POST[$field])) {
@@ -45,7 +43,6 @@ function getValue($field)
  * @param string $message
  * @return string
  */
-
 function wrapInErrorSpan($message): string
 {
     return '<span class="invalid-feedback">' . $message . '</span>';
@@ -56,7 +53,6 @@ function wrapInErrorSpan($message): string
  * @param string $message
  * @return string
  */
-
 function wrapInSuccessSpan($message): string
 {
     return '<span class="success">' . $message . '</span>';
@@ -67,7 +63,6 @@ function wrapInSuccessSpan($message): string
  * @param string $date
  * @return bool
  */
-
 function isDateValid($date)
 {
     $regex = '/^(\d{4})-(\d{2})-(\d{2})$/';
@@ -77,10 +72,10 @@ function isDateValid($date)
 
 /**
  *Check if the field is not empty and get the error message
- *@param  
- * 
+ *@param string $field
+ *@param int $size
+ *@return ?string
  */
-
 function checkTextFieldAndGetErrorMessage($field, int $size): ?string
 {
     if (!isset($_POST[$field])) {
@@ -101,7 +96,6 @@ function checkTextFieldAndGetErrorMessage($field, int $size): ?string
  *@param  
  * 
  */
-
 function checkIframeFieldAndGetErrorMessage($field, int $size): ?string
 {
     if (!isset($_POST[$field])) {
@@ -126,7 +120,6 @@ function checkIframeFieldAndGetErrorMessage($field, int $size): ?string
  * @param string $field
  * @return ?string
  */
-
  function checkDateFieldAndGetErrorMessage($field): ?string
 {
     if (!isset($_POST[$field])) {
@@ -146,7 +139,6 @@ function checkIframeFieldAndGetErrorMessage($field, int $size): ?string
  * @param string $date
  * @return bool
  */
-
 function isDurationValid($duration)
 {
     $regex = '/^(\d{2}):(\d{2})$/';
@@ -158,7 +150,6 @@ function isDurationValid($duration)
  * @param string $field
  * @return ?string
  */
-
 function checkDurationFieldAndGetErrorMessage($field): ?string
 {
     if (!isset($_POST[$field])) {
@@ -182,30 +173,6 @@ function checkDurationFieldAndGetErrorMessage($field): ?string
  * @param array $extensions
  * @return ?string
  */
-
-
-// function checkImageFieldAndGetErrorMessage($field, int $sizeMax, array $extensions): ?string
-// {
-//     if (!isset($_FILES[$field])){
-//         return null;
-//     }
-//     if (empty($_FILES[$field])) {
-//         return wrapInErrorSpan('Merci de renseigner le champ.');
-//     }
-//     if ($_FILES[$field]['size'] > $sizeMax) {
-//         return wrapInErrorSpan('Votre piece jointe ne doit pas dépasser 2Mo');
-//     }
-//     if ($extensions != strtolower(substr(strrchr($_FILES[$field]['name'], '.'), 1))) {
-//         return wrapInErrorSpan('Votre piece jointe doit être au format jpg, jpeg, pdf ou png');
-//     }
-//     return null;
-// }
-
-
-
-
-
-
 function checkImageFieldAndGetErrorMessage($field, $path, int $maxSize = 2097152, array $exts = ['jpg', 'png', 'jpeg']): ?string
 {
 	// Check submit form with post method
@@ -249,34 +216,39 @@ function checkImageFieldAndGetErrorMessage($field, $path, int $maxSize = 2097152
 /**	
  * Upload file
  * 
- * @param string $path to save file
- * @param string $field name of the field the file comes from
- * @param string $renamer name that will be used to rename the uploaded file  
+ * @param string $path /where to save file
+ * @param string $field /name of the field the file comes from
+ * @param string $toRename /name that will be used to rename the uploaded file
+ * @return string $targetTSave / the final path + name and extension of the file   
  */
-
-
-function uploadFile(string $path, string $field, $renamer)
+function uploadFile(string $path, string $field, $toRename)
 {
-    // $renamer = $_POST['title'];
-	$targetToSave = $path . '/' . renameFile($renamer) . '.' . pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION);
-	
-	if(move_uploaded_file($_FILES[$field]['tmp_name'], $targetToSave)){
-        resizeImage($targetToSave, 300);
-		return alert('Super !', 'success');
-    }
-
-	return '';
+	$targetToSave = $path . '/' . renameFile($toRename) . '.' . pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION);
+    move_uploaded_file($_FILES[$field]['tmp_name'], $targetToSave);    
+	return $targetToSave;
 }
 
-function formatBytes($size, $precision = 2) {
+/**
+ * Convert a byte size in ko, Mo, Go, To
+ * @param int $size
+ * @param int $precision
+ * @return int
+ */
+function formatBytes($size, $precision = 2) 
+{
 	$base     = log($size, 1024);
 	$suffixes = ['', 'Ko', 'Mo', 'Go', 'To'];
 
 	return round(pow(1024, $base - floor($base)), $precision) . ' ' . $suffixes[floor($base)];
 }
 
-
-function renameFile($name) {
+/**
+ * Clean and rename the file 
+ * @param string $name
+ * @return string $name
+ */
+function renameFile($name) 
+{
 	$name = trim($name);
 	$name = strip_tags($name);
 	$name = removeAccent($name);
@@ -290,6 +262,11 @@ function renameFile($name) {
 }
 
 
+/**
+ * Remove and replace all the accents from a string
+ * @param string $string
+ * @return string $string
+ */
 function removeAccent($string) {
 	$string = str_replace(
 		['à','á','â','ã','ä', 'ç', 'è','é','ê','ë', 'ì','í','î','ï', 'ñ', 'ò','ó','ô','õ','ö', 'ù','ú','û','ü', 'ý','ÿ', 'À','Á','Â','Ã','Ä', 'Ç', 'È','É','Ê','Ë', 'Ì','Í','Î','Ï', 'Ñ', 'Ò','Ó','Ô','Õ','Ö', 'Ù','Ú','Û','Ü', 'Ý'], 
@@ -300,8 +277,13 @@ function removeAccent($string) {
 }
 
 
-
-function resizeImage($path, $width)
+/**
+ * Resize the uploaded image with a specific width
+ * @param string $path
+ * @param int $width
+ * @return void
+ */
+function resizeImage($path, $width): void
 {
     $manager = new ImageManager(new Driver());
     $image = $manager->read($path);

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Return all the categories existing in the db
+ * Returns all the categories existing in the db
  * @return array $result
  */
 function retrieveAllCategories(): array 
@@ -20,7 +20,11 @@ function retrieveAllCategories(): array
 
 }
 
-
+/**
+ * Returns an array with all the selected categories for a specific movie
+ * @param string $movieId
+ * @return array $result
+ */
 function retrieveAllCategoriesForMovie($movieId): array
 {
     global $db;
@@ -40,7 +44,12 @@ function retrieveAllCategoriesForMovie($movieId): array
     }
 }
 
-
+/**
+ * Returns an array with all the categories, 
+ * and the value true or false for each categorie if it is selected for a specific movie
+ * @param string $movieId
+ * @return array $result
+ */
 function retrieveAllCategoriesWithMovieSelection($movieId): array 
 {
     $allCategories = retrieveAllCategories();
@@ -56,35 +65,42 @@ function retrieveAllCategoriesWithMovieSelection($movieId): array
 }
 
 
+/**
+ * Returns an array of the categories ids for a specific movie
+ * @param string $movieId
+ * @return array $categoriesIds
+ */
 function retrieveAllCategoriesIdsForMovie($movieId): array
 {
     $categories = retrieveAllCategoriesForMovie($movieId);
-    $ids = [];
+    $categoriesIds = [];
     foreach ($categories as $category) {
         $id = $category['id'];
         array_push($ids, $id);
     }
-    return $ids;
+    return $categoriesIds;
 }
 
-
+/**
+ * Returns an array of the categories names for a specific movie
+ * @param string $movieId
+ * @return array $names
+ */
 function retrieveAllCategoriesNamesForMovie($movieId): array
 {
     $categories = retrieveAllCategoriesForMovie($movieId);
-    $names = [];
+    $categoriesNames = [];
     foreach ($categories as $category) {
         $name = $category['name'];
-        array_push($names, $name);
+        array_push($categoriesNames, $name);
     }
-    return $names;
+    return $categoriesNames;
 }
 
 /**
  * Associates the movie id and the categories id in the db
  * @param string $movieId
- * @return void
  */
-
  function addCategoriesToMovie(string $movieId): void
  {
      global $db;

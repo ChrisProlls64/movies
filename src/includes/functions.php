@@ -6,7 +6,6 @@
  * @param string $layout The layout to use
  * @return void
  */
-
 function get_header(string $title, string $layout = 'public'): void
 {
     global $router;
@@ -30,7 +29,6 @@ function get_footer(string $layout = 'public'): void
  * @param string $type The type of alert
  * @return void
  */
-
 function alert(string $message, string $type = 'danger'): void
 {
     $_SESSION['alert'] = [
@@ -52,9 +50,6 @@ function displayAlert(): void
     }
 }
 
-// alert('hello world');
-// displayAlert();
-// die;
 
 
 /**
@@ -75,10 +70,11 @@ function displayAlert(): void
  
  
  /**
-  * Déconnecte après un certain temps d'inactivité
+  * Déconnecte après un certain temps de connexion
+  *@return void
   */
  
- function logoutTimer()
+ function logoutTimer(): void
  {
      global $router;
  
@@ -92,7 +88,7 @@ function displayAlert(): void
  
          if ($now->diff($lastLogin)->h >= $expireHour) {
              unset($_SESSION['user']);
-             alert('Vous avez été déconnecté pour inactivité', 'danger');
+             alert('Vous avez été déconnecté, merci de bien vouloir saisir à nouveau votre identifiant et mot de passe', 'danger');
              header('Location: ' . $router->generate('login'));
              die;
          }

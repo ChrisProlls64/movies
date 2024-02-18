@@ -1,13 +1,6 @@
 <?php
 $db;
 
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     $title = $_POST['title'];
-//     //dump($_POST['title']);
-
-// }
-
-
 /**
  * Add the movie informations in the db
  * @return string $db->lastInsertId The id of the movie just inserted in the db
@@ -46,12 +39,12 @@ function createMovie(): string
         dump($e->getMessage());
         die;
     }
-    uploadFile('./images/poster', 'poster', $_POST['title']);
-    uploadFile('./images/slider', 'slider', $_POST['title']);
+    resizeImage(uploadFile('./images/poster', 'poster', $_POST['title']), 500);
+    // uploadFile('./images/slider', 'slider', $_POST['title']);
     alert('Film ajouté correctement', 'success');
     displayAlert();
     header('Location:' . $router->generate('indexMovies'));
-    dump($db->lastInsertId());
+    // dump($db->lastInsertId());
     return $db->lastInsertId();
 }
 
