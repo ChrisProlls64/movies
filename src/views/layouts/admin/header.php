@@ -29,6 +29,9 @@
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="http://localhost:8888/movies/admin/categories">Liste des catégories</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="http://localhost:8888/movies/admin/utilisateurs">Gestion des admins</a>
+                        </li>
                     </ul>
                     <div class="navbar-text">
                         <a href='<?= $router->generate('logout') ?>' class="btn btn-danger"> Deconnexion</a>

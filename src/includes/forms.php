@@ -139,7 +139,7 @@ function checkIframeFieldAndGetErrorMessage($field, int $size): ?string
  * @param string $date
  * @return bool
  */
-function isDurationValid($duration)
+function isDurationValid($duration): bool
 {
     $regex = '/^(\d{2}):(\d{2})$/';
     return preg_match($regex, $_POST['duration']);
@@ -148,7 +148,7 @@ function isDurationValid($duration)
 /**
  * Check if the image uploaded is ok
  * @param string $field
- * @return ?string
+ * @return ?string error message wrapped in an error span
  */
 function checkDurationFieldAndGetErrorMessage($field): ?string
 {
@@ -219,9 +219,9 @@ function checkImageFieldAndGetErrorMessage($field, $path, int $maxSize = 2097152
  * @param string $path /where to save file
  * @param string $field /name of the field the file comes from
  * @param string $toRename /name that will be used to rename the uploaded file
- * @return string $targetTSave / the final path + name and extension of the file   
+ * @return string $targetToSave / the final path + name and extension of the file   
  */
-function uploadFile(string $path, string $field, $toRename)
+function uploadFile(string $path, string $field, $toRename): string
 {
 	$targetToSave = $path . '/' . renameFile($toRename) . '.' . pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION);
     move_uploaded_file($_FILES[$field]['tmp_name'], $targetToSave);    
@@ -234,7 +234,7 @@ function uploadFile(string $path, string $field, $toRename)
  * @param int $precision
  * @return int
  */
-function formatBytes($size, $precision = 2) 
+function formatBytes($size, $precision = 2): int
 {
 	$base     = log($size, 1024);
 	$suffixes = ['', 'Ko', 'Mo', 'Go', 'To'];
@@ -247,7 +247,7 @@ function formatBytes($size, $precision = 2)
  * @param string $name
  * @return string $name
  */
-function renameFile($name) 
+function renameFile($name): string 
 {
 	$name = trim($name);
 	$name = strip_tags($name);
@@ -267,7 +267,8 @@ function renameFile($name)
  * @param string $string
  * @return string $string
  */
-function removeAccent($string) {
+function removeAccent($string): string 
+{
 	$string = str_replace(
 		['à','á','â','ã','ä', 'ç', 'è','é','ê','ë', 'ì','í','î','ï', 'ñ', 'ò','ó','ô','õ','ö', 'ù','ú','û','ü', 'ý','ÿ', 'À','Á','Â','Ã','Ä', 'Ç', 'È','É','Ê','Ë', 'Ì','Í','Î','Ï', 'Ñ', 'Ò','Ó','Ô','Õ','Ö', 'Ù','Ú','Û','Ü', 'Ý'], 
 		['a','a','a','a','a', 'c', 'e','e','e','e', 'i','i','i','i', 'n', 'o','o','o','o','o', 'u','u','u','u', 'y','y', 'A','A','A','A','A', 'C', 'E','E','E','E', 'I','I','I','I', 'N', 'O','O','O','O','O', 'U','U','U','U', 'Y'], 
@@ -289,5 +290,4 @@ function resizeImage($path, $width): void
     $image = $manager->read($path);
     $image->scale($width);
     $image->save($path);
-
 }

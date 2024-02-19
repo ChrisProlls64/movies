@@ -21,3 +21,20 @@ function addNewCategory($newCategory): void
         }
     }
 }
+
+
+function retrieveNumberOfMoviesPerCategory($categoryId): int
+{
+    global $db;
+    try {
+        $sql = 'SELECT COUNT(*) FROM movie_category WHERE category_id = :id' ;
+        $query = $db->prepare($sql);
+        $query->execute(['id' => $categoryId]);
+        return $query->fetchColumn();
+    } catch (PDOException $e) {
+        if ($_ENV['DEBUG'] == 'true') {
+            dump($e->getMessage());
+            die;
+        }
+    }  
+}

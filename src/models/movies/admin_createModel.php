@@ -40,7 +40,7 @@ function createMovie(): string
         die;
     }
     resizeImage(uploadFile('./images/poster', 'poster', $_POST['title']), 500);
-    // uploadFile('./images/slider', 'slider', $_POST['title']);
+    uploadFile('./images/slider', 'slider', $_POST['title']);
     alert('Film ajouté correctement', 'success');
     displayAlert();
     header('Location:' . $router->generate('indexMovies'));
