@@ -2,8 +2,15 @@
 {% block title %}Accueil{% endblock %} 
 
 {% block content %}
+<<<<<<< HEAD
     {#            
     <div class="carousel slide carousel-fade" data-ride="carousel"> </div>
+=======
+
+{# <div class="carrousel wrapper">
+  <img src="images/slider/banner-a-la-une.jpg" alt="slider à la une" />
+  <div class="carousel slide carousel-fade" data-ride="carousel"> #}
+>>>>>>> 0267630d400d61e8e231a1f4d9c2344d9287398a
     {# Indicators #} {#
     <ol class="carousel-indicators">
       {% for image in images %} {% if loop.first %}{% set active = 'active' %}{%
@@ -38,10 +45,13 @@
     #}
 
     <div id="home" class="wrapper">
+<<<<<<< HEAD
         <div class="carrousel wrapper">
             <img src="images/slider/banner-a-la-une.jpg" alt="slider à la une">
         </div>
 
+=======
+>>>>>>> 0267630d400d61e8e231a1f4d9c2344d9287398a
       <h1 class="title-main">Dernières sorties</h1>
       <div class="lastRelease">
           {% for movie in lastReleased %}
