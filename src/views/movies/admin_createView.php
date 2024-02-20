@@ -3,7 +3,7 @@
 
 
 
-<div class="row g-3 d-flex align-items-center py-4 bg-body-tertiary vertical-center mb-4">
+<div class="row g-3  align-items-center py-4 bg-body-tertiary vertical-center mb-4">
     <form class="form-signin w-100 m-auto" enctype="multipart/form-data" method="POST" action="">
         <h1 class="h3 mb-3 fw-normal text-center">Création d'une fiche de film</h1>
         <div class="form-floating mb-2">

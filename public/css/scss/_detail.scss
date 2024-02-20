@@ -3,9 +3,37 @@
 img.poster {
     width: 20%;
 }
-.details-movie {
-    background: #201d15  no-repeat fixed center;
-    background-size: cover;
-    font-family: sans-serif;
-    color: white;
-  }
+
+#details-movie {
+    display: flex;
+    flex-wrap: wrap;
+
+    .col1 {
+            width: 30%;
+        }
+        
+    .col2 {
+        padding-left: 3%;
+        width: 70%;
+    }
+
+    .title-main h1 {
+        margin-bottom: 0;
+    }
+
+    li {
+        margin-bottom: 1%;
+    }
+
+}
+
+
+.trailer {
+    text-align: center;
+    h2 {
+    font-family: var(--title-font);
+    font-family: "Arcane Regular";
+    font-size: 2em;
+    color: var(--active-color);
+    }
+}
