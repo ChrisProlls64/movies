@@ -1,26 +1,34 @@
 {% extends "/layouts/public.twig" %} 
-{% block title %}Detail du film {{movie.title}}{% endblock %}
+{% block title %}
+Detail du film{{ movie.title }}
+{% endblock %} 
 
 {% block content %}
-<div id="details-movie" class="card">
-    
-    <div class="col">
-        <img class="poster" src="{{ basePath() }}images/poster/{{ movie.poster }}" alt="{{ movie.title }}" />
-    </div> 
-    <div>
-        {{ movie.trailer|raw }}
-        {# <iframe width="560" height="315" src="{{ movie.trailer|raw }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> #}
-    </div>
-    <div class="col">
-        <h1 class="title-main">{{ movie.title }}</h1>
-        
-        <ul>
-            <li>Date de sortie : {{ movie.releaseDate|date('d/m/Y') }}</li>
-            <li>Durée du film : {{ movie.duration|date('H:i:s') }}</li>
-            <li class="'note-press">Note de la presse : {{ movie.note }} / 5</li>
-        </ul>
-        <p>{{ movie.synopsis}}</p>
-    </div>
-</div>
-{% endblock %}
+<div class="wrapper">
+    <div id="details-movie" class="card">
+        <div class="col1">
+            <img
+                class="thumbnail"
+                src="{{ basePath() }}images/poster/{{ movie.poster }}"
+                alt="{{ movie.title }}"
+            >
+        </div>
 
+        <div class="col2">
+            <h1 class="title-main">{{ movie.title }}</h1>
+  
+            <ul>
+                <li>Date de sortie : {{ movie.releaseDate|date('d/m/Y') }}</li>
+                <li>Durée du film : {{ movie.duration|date('H:i:s') }}</li>
+                <li class="'note-press">Note de la presse : {{ movie.note }} / 5</li>
+            </ul>
+            <p>Synopsis : {{ movie.synopsis }}</p>
+        </div>
+    </div>
+  <div class="trailer">
+    <h2>Bande-annonce</h2>
+    {{ movie.trailer | raw }}
+  </div>
+</div>
+
+{% endblock %}

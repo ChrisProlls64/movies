@@ -123,3 +123,15 @@ function retrieveAllCategoriesNamesForMovie($movieId): array
          }
      }
  }
+
+ /**
+ * Returns all the informations of a movie along its categories names
+ */
+function retrieveMovieWithCategoriesNames($id) : array 
+{
+    $movie = retrieveMovie($id);
+    $names = retrieveAllCategoriesNamesForMovie($id);
+    $movie['categoryNames'] = $names;
+    return $movie;
+
+}

@@ -13,6 +13,9 @@ function getMovies()
     return $query->fetchAll();
 }
 
+/**
+ * Get the movie details
+ */
 function detailsMovie ()
 {
     global $db;
@@ -23,3 +26,4 @@ function detailsMovie ()
 
     return $query->fetch();
 }
+

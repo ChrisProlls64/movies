@@ -232,9 +232,8 @@ function uploadFile(string $path, string $field, $toRename): string
  * Convert a byte size in ko, Mo, Go, To
  * @param int $size
  * @param int $precision
- * @return int
  */
-function formatBytes($size, $precision = 2): int
+function formatBytes($size, $precision = 2)
 {
 	$base     = log($size, 1024);
 	$suffixes = ['', 'Ko', 'Mo', 'Go', 'To'];

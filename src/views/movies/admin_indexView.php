@@ -5,7 +5,7 @@
     <?php foreach ($movies as $movie) : ?>
     <div class="col">
         <div class="card">
-                <img alt="<?= $movie['title'] ?>" src= "/movies/images/poster/<?= $movie['poster'] ?>" class=" card-img-top" alt="...">
+                <img alt="<?= $movie['title'] ?>" src= "/movies/images/poster/<?= $movie['poster'] ?>" class=" card-img-top" alt="<?= $movie['title'] ?>">
                 <div class="card-body">
                     <h5 class="card-title"><?= $movie['title']; ?></h5>
                     <?php $categories = retrieveAllCategoriesForMovie($movie['id']) ?>

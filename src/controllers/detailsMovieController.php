@@ -8,3 +8,7 @@ if (!empty($movie)) {
     header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
     die('404 - Page not found');
 }
+// dump($movie[]);
+// $movieId = ;
+// $movieCategories = retrieveMovieWithCategoriesNames($movieId); 
+// dump($movieCategories);

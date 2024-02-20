@@ -14,8 +14,8 @@ if (!empty($_POST['birthDate'])){
 
         saveLastLogin($accessUser);
         
-        alert('Vous êtes connecté', 'success');
-        header('Location: ' . $router->generate('users'));
+        alert('Bienvenue sur l\'espace administrateur d\'Animascoop', 'success');
+        header('Location: ' . $router->generate('allMoviesCards'));
         die;
     } else {
         alert('Identifiants incorrects');
