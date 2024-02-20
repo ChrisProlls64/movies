@@ -4,6 +4,12 @@
 {% block content %}
     {#            
     <div class="carousel slide carousel-fade" data-ride="carousel"> </div>
+=======
+
+{# <div class="carrousel wrapper">
+  <img src="images/slider/banner-a-la-une.jpg" alt="slider à la une" />
+  <div class="carousel slide carousel-fade" data-ride="carousel"> #}
+
     {# Indicators #} {#
     <ol class="carousel-indicators">
       {% for image in images %} {% if loop.first %}{% set active = 'active' %}{%
@@ -41,6 +47,7 @@
         <div class="carrousel wrapper">
             <img src="images/slider/banner-a-la-une.jpg" alt="slider à la une">
         </div>
+
 
       <h1 class="title-main">Dernières sorties</h1>
       <div class="lastRelease">
