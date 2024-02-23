@@ -18,7 +18,7 @@ function retrieveMovie($id) : array
 }
 
 /**
- * Returns all the informations of a movie along with its categories names
+ * Returns all the informations of a movie along its categories names
  */
 // function retrieveMovieWithCategoriesNames($id) : array 
 // {
