@@ -19,5 +19,4 @@ function deleteCategory($categoryId): void
             die;
         }
     }
-
 }

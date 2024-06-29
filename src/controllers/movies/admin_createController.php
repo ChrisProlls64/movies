@@ -1,6 +1,5 @@
 <?php
 
-
 $errorMessages = [
     'title' => null,
     'releaseDate' => null,
@@ -23,35 +22,9 @@ $errorMessages['poster'] = checkImageFieldAndGetErrorMessage('poster', './images
 $errorMessages['duration'] = checkDurationFieldAndGetErrorMessage('duration');
 $errorMessages['slider'] = checkImageFieldAndGetErrorMessage('slider', './images/slider');
 
-// dump($errorMessages);
-
-
-// if (!empty($_POST['note'])) {
-//     if (!is_numeric($_POST['note']) || ($_POST['note']) < 0 || ($_POST['note']) > 5 ) {
-//         $errorMessages['note'] = 'Le format de la note n\'est pas valide. Merci de rentrer un nombre entre 0 et 5.';
-//     } 
-// }
-
-// if (!empty($_POST['trailer'])) {
-//     if (!is_numeric($_POST['trailer']) && (count_chars($_POST['director']) > 255 )) {
-//         $errorMessages['trailer'] = 'Le format de la note n\'est pas valide. Merci de rentrer un nombre entre 0 et 5.';
-//     } 
-// }
-
-// if (!empty($_POST['categories'])) {
-//     if (!is_numeric($_POST['categories']) && (count_chars($_POST['categories']) > 255 )) {
-//         $errorMessages['categories'] = 'Le format de la note n\'est pas valide. Merci de rentrer un nombre entre 0 et 5.';
-//     } 
-// }
-
-
-
-
-
-
 //Add the movie informations to the db
-
 if (!empty($_POST)) {
+    logoutIfCSRFTokenIsNotValid();
     if (array_filter($errorMessages)) {
         if (empty($_GET['id'])) {
             $movieId = createMovie();

@@ -1,12 +1,12 @@
 <?php
-
+dump($_SESSION);
+dump($_POST);
 /**
  * Add new category into the table "categories" in the db 
  * @param string $newCategory
  */
-
 function addNewCategory($newCategory): void
-{
+{   
     global $db;
     $data = ['newCategory' => $newCategory];
     try {
@@ -22,7 +22,10 @@ function addNewCategory($newCategory): void
     }
 }
 
-
+/**
+ * Retrieve the number of movies in each category
+ * @param int $categoryId
+ */
 function retrieveNumberOfMoviesPerCategory($categoryId): int
 {
     global $db;

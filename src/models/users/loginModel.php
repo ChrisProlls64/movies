@@ -12,10 +12,10 @@ function checkUserAccess()
     $query->execute(['email' => $_POST['email']]);
     $user = $query->fetch();
     if (!empty($_POST['pwd'])) {
-        if (password_verify($_POST['pwd'], $user->pwd) === false) {
-            return false;
-        } else {
+        if ($user && password_verify($_POST['pwd'], $user->pwd)) {
             return $user->id;
+        } else {
+            return false;
         }
     }
 }
@@ -24,7 +24,6 @@ function checkUserAccess()
  * 
  * 
  */
-
 function saveLastLogin(string $userId)
 {
     global $db;
@@ -32,3 +31,15 @@ function saveLastLogin(string $userId)
     $query = $db->prepare($sql);
     $query->execute(['id' => $userId]);
 }
+
+/**
+ * Generates a token when logged in, to avoid CSRF attacks
+ * @return string $token
+ *  */
+function generateCsrfToken(): string
+{
+    $token = bin2hex(random_bytes(32));
+    return $token;
+}
+
+$_SESSION['csrf_token'] = generateCsrfToken();

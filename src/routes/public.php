@@ -13,5 +13,5 @@ $router->map( 'GET', '/film/[slug:slug]', 'detailsMovie', 'details');
 
 //Pages
 
-$router->map( 'GET', '/politique-confidentialite', 'privacy');
+$router->map( 'GET', '/politique-confidentialite', 'privacy', 'privacy');
 $router->map( 'GET', '/mentions-legales', 'legalNotice');

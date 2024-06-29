@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Get all movies ordered by added date
  */

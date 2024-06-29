@@ -43,10 +43,10 @@ if (!empty($_POST['birthDate'])){
      } else {
          $_SESSION['loginAttempts'][$adresseIP]++;
      }
- 
+     dump($_SESSION);
      if (isset($_SESSION['timestamp'])) {
          // Check si le nombre de tentatives dépasse le seuil À revoir
-         if ($_SESSION['loginAttempts'][$adresseIP] > $maxAttempts && time() - $_SESSION['timestamp'][$adresseIP] < $periodeRateLimit) {
+         if ($_SESSION['loginAttempts'][$adresseIP] >= $maxAttempts && time() - $_SESSION['timestamp'][$adresseIP] < $periodeRateLimit) {
              alert('Trop de tentatives de connexion. Veuillez réessayer plus tard.');
              header('Location: ' . $router->generate('home'));
              die;
@@ -60,4 +60,4 @@ if (!empty($_POST['birthDate'])){
      }
  }
  
- limitLoginAttempts(5, 3600);
+ limitLoginAttempts(2, 30);

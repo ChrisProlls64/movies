@@ -44,7 +44,6 @@
                 <input name="categories[]" type="checkbox" class="form-control btn-check" <?= $checked ?> id="<?= $category['id'] ?>" value="<?= $category['id'] ?>" autocomplete="off">
                 <label for="<?= $category['id'] ?>" class="btn btn-outline-primary"><?= $category['name'] ?></label>
             <?php } ?>
-
         </div>
         <div class="form-floating mb-2">
             <?php $class = (isset($errorMessages['note'])) ? 'is-invalid' : ''; ?>
@@ -69,12 +68,12 @@
             <label for="slider" class="form-check-label" for="flexSwitchCheckChecked">Mettre le film à la une</label>
         </div>
         <div class="form-floating mb-2">
-
             <input name="slider" type="file" class="form-control <?= $error['class']; ?>" value="<?= getValue('slider'); ?>" id="slider" placeholder="Image à la une">
             <label for="slider">Image à la une</label>
-
         </div>
-
+        <?php if (isset($_SESSION['csrf_token'])) {
+            echo '<input type="hidden" name="csrf_token" value="' . $_SESSION['csrf_token'] . '">';
+        } ?>
         <button class="btn btn-primary w-100 py-2" type="submit">Modifier la fiche du film</button>
     </form>
 </div>

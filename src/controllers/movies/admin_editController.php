@@ -1,7 +1,4 @@
 <?php
-
-// dump(retrieveMovieInfos());
-
 $errorMessages = [
     'title' => null,
     'releaseDate' => null,
@@ -17,7 +14,6 @@ $errorMessages = [
 ];
 
 // Check error messages for every field and displays it in error style
-
 $errorMessages['title'] = checkTextFieldAndGetErrorMessage('title', 100);
 $errorMessages['releaseDate'] = checkDateFieldAndGetErrorMessage('releaseDate');
 $errorMessages['duration'] = checkDurationFieldAndGetErrorMessage('duration');
@@ -29,12 +25,9 @@ $errorMessages['synopsis'] = checkTextFieldAndGetErrorMessage('synopsis', 1000);
 $errorMessages['trailer'] = checkIframeFieldAndGetErrorMessage('trailer', 500);
 $errorMessages['imgSlider'] = checkImageFieldAndGetErrorMessage('synopsis', './images/slider');
 
-// dump($errorMessages);
-
-
 //Add or update the movies informations
-
 if (!empty($_POST)) {
+    logoutIfCSRFTokenIsNotValid();
     if (array_filter($errorMessages)) {
         if (!empty($_GET['id'])) {
             updateMovie();

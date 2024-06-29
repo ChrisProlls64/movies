@@ -22,11 +22,9 @@ header {
         @include button;
         background-color: var(--header);
     }
-
 }
 
 a {
-//    color : red;
     text-decoration: none;
 }
 
@@ -43,8 +41,6 @@ a {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    // justify-content: space-between;
-    
 }
 
 .menu li {
@@ -64,8 +60,6 @@ a {
     font-size: 1.5em;
     letter-spacing: .2rem;
 	transition: .3s ease color;
-    // display: flex;
-    // flex-wrap: wrap;
 }
 
 .menu ul li a:hover,
@@ -98,10 +92,8 @@ form.search {
         color: var(--active-color);
         width: 45px !important;
         height: 30px;
-        // padding: 10px;
         display: block;
         text-align: center;
-        // flex-wrap: wrap;
         justify-content: center;
     }
     

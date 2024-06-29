@@ -45,7 +45,6 @@
                     <label for="<?= $category['id'] ?>" class="btn btn-outline-primary"><?= $category['name'] ?></label>
             <?php }
             endforeach; ?>
-
         </div>
         <?= $errorMessages['categories']; ?>
         <div class="form-floating mb-2">
@@ -67,22 +66,20 @@
             <?= $errorMessages['synopsis']; ?>
         </div>
         <div class="form-check form-switch">
-            <input name="slider" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked value="1">
+            <input name="slider" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" value="1">
             <label for="slider" class="form-check-label" for="flexSwitchCheckChecked">Mettre le film à la une</label>
         </div>
         <div class="form-floating mb-2">
 
             <input name="slider" type="file" class="form-control <?= $error['class']; ?>" value="<?= getValue('slider'); ?>" id="slider" placeholder="Image à la une">
             <label for="slider">Image à la une</label>
-
         </div>
-
-
+        <?php if (!empty($_SESSION['csrf_token'])) {
+            echo '<input type="hidden" name="csrf_token" value="' . $_SESSION['csrf_token'] . '">';
+        }; ?>
         <button class="btn btn-primary w-100 py-2" type="submit">Créer</button>
     </form>
 </div>
-
-
 
 
 <?php get_footer('admin'); ?>

@@ -12,6 +12,7 @@ function checkIfCategoryAlreadyExists($newCategoryName): bool
 
 
 if (isset($_POST['newCategory']) && !empty($_POST['newCategory'])) {
+    logoutIfCSRFTokenIsNotValid();
     if (checkIfCategoryAlreadyExists($_POST['newCategory']) === true) {
         alert('La catégorie existe déjà');
     } else {

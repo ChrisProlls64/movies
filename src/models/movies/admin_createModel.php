@@ -8,6 +8,11 @@ $db;
 
 function createMovie(): string
 {
+    //  compares the csrf token generated at the login, and the token sent into the post 
+    if (!isset($_POST['csrf_token']) ||  $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die('Invalid CSRF token');
+    }
+    
     global $db;
     global $router;
     $data = [

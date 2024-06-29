@@ -44,7 +44,7 @@ function getAlreadyExistId()
 }
 
 
-/* check if there is almost One id in the db
+/* check if there is at least One id in the db
 *
 */
 

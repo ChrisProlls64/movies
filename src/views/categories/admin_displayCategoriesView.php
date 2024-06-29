@@ -1,5 +1,4 @@
-<?php get_header('Catégories', 'admin'); ?>
-
+<?php get_header('Catégories', 'admin')?>
 
 <div class="row g-4">
 
@@ -8,11 +7,13 @@
     $categories = retrieveAllCategories();
     foreach ($categories as $category) { ?>
       <li class="list-group-item">
-        <a class="link-danger" href="<?= $router->generate('deleteCategory', ['id' =>  htmlentities($category['id'])]); ?>" onclick="return confirm('êtes-vous sûr de vouloir supprimer cette catégorie ?')"><img id="bin" src="/movies/public/images/bin.svg" height="20"></a>
-        <?= $category['name'] ?>
         <span class="badge bg-primary rounded-pill">
-
-          <?= retrieveNumberOfMoviesPerCategory($category['id']); ?></span>
+          <?= retrieveNumberOfMoviesPerCategory($category['id']); ?>
+        </span>
+        <?= $category['name'] ?>
+        <a class="link-warning" href="<?= $router->generate('deleteCategory', ['id' =>  htmlentities($category['id'])]); ?>" onclick="return confirm('êtes-vous sûr de vouloir supprimer cette catégorie ?')">
+          <img id="bin" src="/movies/public/images/bin.svg" height="20">
+        </a>
       </li>
     <?php } ?>
   </ul>
@@ -21,9 +22,12 @@
   <form class="col" method="post">
     <div class="form-floating mb-2">
       <input name="newCategory" type="text" class="form-control <?= $class; ?>" id="newCategory">
-      <label for="newCategory">Nom de la nouvelle catégorie</label>
+      <label for="newCategory">Ajouter une nouvelle catégorie</label>
     </div>
-    <button class="btn btn-success w-100 py-2" type="submit">Ajouter une catégorie de film</button>
+    <?php if (isset($_SESSION['csrf_token'])) {
+      echo '<input type="hidden" name="csrf_token" value="' . $_SESSION['csrf_token'] . '">';
+    } ?>
+    <button class="btn btn-success w-100 py-2" type="submit">Valider</button>
   </form>
 
 </div>

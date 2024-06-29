@@ -1,5 +1,5 @@
 <?php get_header('Se connecter', 'login'); ?>
-<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<!-- <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
 
 <style>
     html,
@@ -12,6 +12,9 @@
     .form-signin {
         max-width: 330px;
         padding: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .form-signin .form-floating:focus-within {
@@ -30,6 +33,10 @@
         border-top-right-radius: 0;
     }
 
+    .form-full-width {
+        width: 100%;
+    }
+
     @media (min-width: 768px) {
         .bd-placeholder-img-lg {
             font-size: 3.5rem;
@@ -39,6 +46,10 @@
     .btn-bd-primary {
         --bd-violet-bg: #712cf9;
         --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+    }
+
+    .btn-color {
+        background-color: #fd7e14;
     }
 
     .bd-mode-toggle {
@@ -56,15 +67,16 @@
 
 <div class="d-flex align-items-center py-4 bg-body-tertiary vertical-center">
     <form class="form-signin w-100 m-auto" method="POST">
-        <h1 class="h3 mb-3 fw-normal text-center">Se connecter</h1>
-        <div class="form-floating">
+        <img src="/movies/images/animascoop_logo.png">
+        <h1 class="h3 mb-3 fw-normal text-center">Connexion</h1>
+        <div class="form-floating form-full-width">
             <?php $error = checkEmptyFields('email'); ?>
             <input name="email" type="email" class="form-control <?= $error['class']; ?>" id="email" placeholder="Email">
             <label for="email">Email</label>
             <?= $error['message'] ?>
         </div>
         <?php $error = checkEmptyFields('pwd'); ?>
-        <div class="form-floating">
+        <div class="form-floating form-full-width">
             <input name="pwd" type="password" class="form-control <?= $error['class']; ?>" id="floatingPassword" placeholder="Mot de passe">
             <label for="floatingPassword">Mot de passe</label>
             <?= $error['message'] ?>
@@ -73,7 +85,7 @@
             <input name="birthDate" type="date" class="form-control" id="birthDate">
             <label for="birthDate"></label>
         </div>
-        <button class="btn btn-primary w-100 py-2" type="submit">Connexion</button>
+        <button class="btn w-100 py-2 btn-color" type="submit">Connexion</button>
         <p class="mt-4 mb-3 text-body-secondary text-center">
             <a href="<?= $router->generate('lostPassword'); ?>">Mot de passe oublié ?</a>
         </p>
