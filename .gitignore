@@ -1,2 +1,3 @@
 src/config/*.env
 vendor
+.DS_Store

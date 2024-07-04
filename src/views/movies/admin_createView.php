@@ -1,6 +1,4 @@
 <?php get_header('Créer une fiche de film', 'admin'); ?>
-<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
 
 
 <div class="row g-3  align-items-center py-4 bg-body-tertiary vertical-center mb-4">
@@ -65,15 +63,19 @@
             <label for="trailer">Bande annonce</label>
             <?= $errorMessages['synopsis']; ?>
         </div>
-        <div class="form-check form-switch">
-            <input name="slider" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" value="1">
+        <!-- <div class="form-check form-switch">
+            <input name="slider" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked value="1">
             <label for="slider" class="form-check-label" for="flexSwitchCheckChecked">Mettre le film à la une</label>
         </div>
         <div class="form-floating mb-2">
 
-            <input name="slider" type="file" class="form-control <?= $error['class']; ?>" value="<?= getValue('slider'); ?>" id="slider" placeholder="Image à la une">
+            <input name="slider" type="file" class="form-control 
+            
+            " value="
+            
+            " id="slider" placeholder="Image à la une">
             <label for="slider">Image à la une</label>
-        </div>
+        </div> -->
         <?php if (!empty($_SESSION['csrf_token'])) {
             echo '<input type="hidden" name="csrf_token" value="' . $_SESSION['csrf_token'] . '">';
         }; ?>

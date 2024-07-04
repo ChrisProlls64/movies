@@ -1,7 +1,4 @@
 <?php get_header('Modifier une fiche de film', 'admin'); ?>
-<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
-
 
 <div class="row g-3 d-flex align-items-center py-4 bg-body-tertiary vertical-center mb-4">
     <form class="form-signin w-100 m-auto" enctype="multipart/form-data" method="POST" action="">

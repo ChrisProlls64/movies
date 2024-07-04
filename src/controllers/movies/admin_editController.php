@@ -9,8 +9,8 @@ $errorMessages = [
     'note' => null,
     'synopsis' => null,
     'trailer' => null,
-    'slider' => null,
-    'imgSlider' => null
+    // 'slider' => null,
+    // 'imgSlider' => null
 ];
 
 // Check error messages for every field and displays it in error style
@@ -18,12 +18,12 @@ $errorMessages['title'] = checkTextFieldAndGetErrorMessage('title', 100);
 $errorMessages['releaseDate'] = checkDateFieldAndGetErrorMessage('releaseDate');
 $errorMessages['duration'] = checkDurationFieldAndGetErrorMessage('duration');
 $errorMessages['director'] = checkTextFieldAndGetErrorMessage('director', 255);
-$errorMessages['poster'] = checkImageFieldAndGetErrorMessage('poster', './images/poster');  // ====>> À REVOIR (paramètres)
+// $errorMessages['poster'] = checkImageFieldAndGetErrorMessage('poster', './images/poster');  // ====>> À REVOIR (paramètres)
 // $errorMessages['categories'] = checkTextFieldAndGetErrorMessage('categories', 100);
-$errorMessages['note'] = checkTextFieldAndGetErrorMessage('note', 100);   // ====>> À REVOIR (note comprise entre 0 et 5)
+$errorMessages['note'] = checkTextFieldAndGetErrorMessage('note', 5);   // ====>> À REVOIR (note comprise entre 0 et 5)
 $errorMessages['synopsis'] = checkTextFieldAndGetErrorMessage('synopsis', 1000);
 $errorMessages['trailer'] = checkIframeFieldAndGetErrorMessage('trailer', 500);
-$errorMessages['imgSlider'] = checkImageFieldAndGetErrorMessage('synopsis', './images/slider');
+// $errorMessages['imgSlider'] = checkImageFieldAndGetErrorMessage('synopsis', './images/slider');
 
 //Add or update the movies informations
 if (!empty($_POST)) {

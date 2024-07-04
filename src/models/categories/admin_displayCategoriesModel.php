@@ -1,6 +1,8 @@
 <?php
-dump($_SESSION);
-dump($_POST);
+// To see if the csrf token of the session and the one sent by the hidden input are the same
+// dump($_SESSION);
+// dump($_POST);
+
 /**
  * Add new category into the table "categories" in the db 
  * @param string $newCategory

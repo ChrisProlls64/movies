@@ -1,14 +1,12 @@
 # movies
-Site de cinéma
+Site de cinéma d'animation
 
-Acces admin Etienne : 
+<!-- Acces admin Etienne : 
 mail : etienne@greta.fr
-pwd : tipTOP12345!
+pwd : tipTOP12345! -->
 
 
 Github du projet movies : 
 https://github.com/ChrisProlls64/movies.git
 
-BDD : dans le fichier movie.sql à la racine du dossier movie.zip
-
-test
+<!-- BDD : dans le fichier movie.sql à la racine du dossier movie.zip -->
