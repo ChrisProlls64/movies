@@ -13,11 +13,11 @@ session_start();
 // session_unset();
 
 
+require SRC . 'includes/categoriesHelper.php';
 require SRC . 'config/database.php';
 require SRC . 'includes/forms.php';
-require SRC . 'includes/categoriesHelper.php';
-require SRC . 'includes/securityHelper.php';
 require SRC . 'includes/logout.php';
+require SRC . 'includes/securityHelper.php';
 
 
 $router = new AltoRouter();
@@ -61,3 +61,5 @@ if (!empty($match['target'])) {
     header($_SERVER['SERVER_PROTOCOL'] . ' 404 NOT FOUND');
     die;
 }
+
+
