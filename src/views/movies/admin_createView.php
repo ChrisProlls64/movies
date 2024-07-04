@@ -54,7 +54,7 @@
             <?= $errorMessages['note']; ?>
         </div>
         <div class="form-floating mb-2">
-            <?php $class = (isset($errorMessages['synopsis'])) ? 'is-invalid' : ''; ?>
+            <?php $class = (!empty($errorMessages['synopsis'])) ? 'is-invalid' : ''; ?>
             <textarea name="synopsis" type="text" class="form-control <?= $class; ?>" id="synopsis" size="500" maxlength="1000" value="<?= htmlentities(getValue('synopsis')); ?>"  placeholder="Synopsis" rows="5"></textarea>
             <label for="synopsis">Synopsis</label>
             <?= $errorMessages['synopsis']; ?>
@@ -74,5 +74,6 @@
     </form>
 </div>
 
-
 <?php get_footer('admin'); ?>
+
+

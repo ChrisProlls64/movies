@@ -17,11 +17,11 @@ $errorMessages['releaseDate'] = checkDateFieldAndGetErrorMessage('releaseDate');
 $errorMessages['duration'] = checkDurationFieldAndGetErrorMessage('duration');
 $errorMessages['director'] = checkTextFieldAndGetErrorMessage('director', 255); // OK
 // $errorMessages['poster'] = checkImageFieldAndGetErrorMessage('poster', './images/poster');  // ====>> À REVOIR (paramètres)
-$errorMessages['categories'] = checkCategoryFieldAndGetErrorMessage('category');
+$errorMessages['categories'] = checkCategoryFieldAndGetErrorMessage('categories');
 $errorMessages['note'] = checkNoteFieldAndGetErrorMessage('note', 5);   // OK
 $errorMessages['synopsis'] = checkTextFieldAndGetErrorMessage('synopsis', 1000); // OK
 $errorMessages['trailer'] = checkIframeFieldAndGetErrorMessage('trailer', 500); // OK
-
+dump($errorMessages);
 //Add or update the movies informations
 if (!empty($_POST)) {
     // dump($errorMessages);

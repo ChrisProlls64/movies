@@ -36,17 +36,15 @@
             <?= $errorMessages['poster']; ?>
         </div>
         <legend>Catégories </legend>
-        <div class="btn-group mb-3" role="group" aria-label="Catégories du film">
+        <div class="btn-group" role="group" aria-label="Catégories du film">
             <?php $categories = retrieveAllCategoriesWithMovieSelection(getValue('id')); ?>
             <?php foreach ($categories as $category) { ?>
                 <?php $checked = $category['checked'] === true ? 'checked' : ''; ?>
-                <?php $class = empty($categories) || !empty($errorMessages['categories']) ? 'btn-outline-danger' : 'btn-outline-primary'; ?>
-                 <!-- (!isset($errorMessages['categories'])) ? 'btn-outline-primary' : 'btn-outline-danger' ; ?> -->
-                <input name="categories[]" type="checkbox" class="form-control btn-check" <?= $checked ?> id="<?= $category['id'] ?>" value="<?= $category['id'] ?>" autocomplete="off">
-                <label for="<?= $category['id'] ?>" class="btn <?= $class?>"><?= $category['name'] ?></label>
-                <?php } ?>
-                <?= $errorMessages['categories']; ?>
+                <input name="categories[]" type="checkbox" class="btn-check" <?= $checked ?> id="<?= $category['id'] ?>" value="<?= $category['id'] ?>" autocomplete="off">
+                <label for="<?= $category['id'] ?>" class="btn btn-outline-primary"><?= $category['name'] ?></label>
+            <?php } ?>
         </div>
+        <?= $errorMessages['categories']; ?>
         <div class="form-floating mb-2">
             <?php $class = (isset($errorMessages['note'])) ? 'is-invalid' : ''; ?>
             <input name="note" type="number" min="0" max="5" step="0.1" class="form-control <?= $class; ?>" value="<?= getValue('note'); ?>" id="note" placeholder="Note">
