@@ -21,6 +21,7 @@ $errorMessages['categories'] = checkCategoryFieldAndGetErrorMessage('categories'
 $errorMessages['note'] = checkNoteFieldAndGetErrorMessage('note', 5);   // OK
 $errorMessages['synopsis'] = checkTextFieldAndGetErrorMessage('synopsis', 1000); // OK
 $errorMessages['trailer'] = checkIframeFieldAndGetErrorMessage('trailer', 500); // OK
+
 //Update the movies informations
 if (!empty($_POST)) {
     // dump($errorMessages);
