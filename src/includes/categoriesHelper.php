@@ -59,7 +59,6 @@ function retrieveAllCategoriesWithMovieSelection($movieId): array
         $category['checked'] = in_array($category['id'], $allCategoriesIdsForMovie);
         array_push($result, $category);
     }
-    // dump($result);
     return $result;
 
 }

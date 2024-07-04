@@ -24,14 +24,13 @@ $errorMessages['trailer'] = checkIframeFieldAndGetErrorMessage('trailer', 500); 
 
 //Update the movies informations
 if (!empty($_POST)) {
-    // dump($errorMessages);
     logoutIfCSRFTokenIsNotValid();
     if (empty(array_filter($errorMessages))) {
         if (!empty($_GET['id'])) {
             updateMovie();
         } 
     } else {
-        alert('Merci de remplir tous les champs du formulaire');
+        alert('Merci de remplir correctement les champs du formulaire');
     }
 } else if (!empty($_GET['id'])) {
     $_POST = retrieveMovieInfos($_GET['id']);

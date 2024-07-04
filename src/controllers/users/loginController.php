@@ -43,7 +43,6 @@ if (!empty($_POST['birthDate'])){
      } else {
          $_SESSION['loginAttempts'][$adresseIP]++;
      }
-     dump($_SESSION);
      if (isset($_SESSION['timestamp'])) {
          // Check si le nombre de tentatives dépasse le seuil À revoir
          if ($_SESSION['loginAttempts'][$adresseIP] >= $maxAttempts && time() - $_SESSION['timestamp'][$adresseIP] < $periodeRateLimit) {

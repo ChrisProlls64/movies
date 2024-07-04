@@ -19,7 +19,7 @@
             </div>
             <div class="form-floating mb-2 col-md-6">
                 <?php $class = (isset($errorMessages['duration'])) ? 'is-invalid' : ''; ?>
-                <input name="duration" type="time" class="form-control <?= $error['class']; ?>" id="duration" value="<?= htmlentities(getValue('duration')); ?>" placeholder="Durée du film">
+                <input name="duration" type="time" class="form-control <?= $class; ?>" id="duration" value="<?= htmlentities(getValue('duration')); ?>" placeholder="Durée du film">
                 <label class="ms-2" for="duration">Durée du film</label>
                 <?= $errorMessages['duration']; ?>
             </div>
@@ -32,16 +32,16 @@
         </div>
         <div class="form-floating mb-2">
             <?php $class = (isset($errorMessages['poster'])) ? 'is-invalid' : ''; ?>
-            <input name="poster" type="file" class="form-control <?= $error['class']; ?>" value="<?= htmlentities(getValue('poster')); ?>" id="poster" placeholder="Lien vers l'affiche">
+            <input name="poster" type="file" class="form-control <?= $class; ?>" value="<?= htmlentities(getValue('poster')); ?>" id="poster" placeholder="Lien vers l'affiche">
             <label for="poster">Affiche</label>
             <?= $errorMessages['poster']; ?>
         </div>
+        
         <legend>Catégories</legend>
         <div class="btn-group mb-3" role="group" aria-label="Catégories du film">
-            <?php $class = (isset($errorMessages['categories'])) ? 'is-invalid' : ''; ?>
             <?php $categories = retrieveAllCategories(); ?>
             <?php foreach ($categories as $category) : { ?>
-                    <input name="categories[]" type="checkbox" class="form-control <?= $error['class']; ?> btn-check" id="<?= $category['id'] ?>" value="<?= $category['id'] ?>" autocomplete="off">
+                    <input name="categories[]" type="checkbox" class="form-control <?= $class; ?> btn-check" id="<?= $category['id'] ?>" value="<?= $category['id'] ?>" autocomplete="off">
                     <label for="<?= $category['id'] ?>" class="btn btn-outline-primary"><?= $category['name'] ?></label>
             <?php }
             endforeach; ?>
@@ -61,7 +61,7 @@
         </div>
         <div class="form-floating mb-2">
             <?php $class = (isset($errorMessages['trailer'])) ? 'is-invalid' : ''; ?>
-            <input name="trailer" type="text" class="form-control <?= $class; ?>" id="trailer" value="<?= htmlentities(getValue('trailer')); ?>"  placeholder="Lien vers la bande annonce">
+            <input name="trailer" type="text" class="form-control input-group-text <?= $class; ?>" id="trailer" value="<?= htmlentities(getValue('trailer')); ?>"  placeholder="Lien vers la bande annonce">
             <label for="trailer">Bande annonce</label>
             <?= $errorMessages['trailer']; ?>
         </div>

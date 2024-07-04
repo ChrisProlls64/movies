@@ -18,7 +18,7 @@ $errorMessages['releaseDate'] = checkDateFieldAndGetErrorMessage('releaseDate');
 $errorMessages['duration'] = checkDurationFieldAndGetErrorMessage('duration'); // OK
 $errorMessages['director'] = checkTextFieldAndGetErrorMessage('director', 255); // OK
 // $errorMessages['poster'] = checkImageFieldAndGetErrorMessage('poster', './images/poster');  // ====>> À REVOIR (paramètres)
-$errorMessages['categories'] = checkCategoryFieldAndGetErrorMessage('category');
+$errorMessages['categories'] = checkCategoryFieldAndGetErrorMessage('categories');
 $errorMessages['note'] = checkNoteFieldAndGetErrorMessage('note', 5);   // OK
 $errorMessages['synopsis'] = checkTextFieldAndGetErrorMessage('synopsis', 1000); // OK
 $errorMessages['trailer'] = checkIframeFieldAndGetErrorMessage('trailer', 500); // OK
@@ -26,7 +26,6 @@ $errorMessages['trailer'] = checkIframeFieldAndGetErrorMessage('trailer', 500); 
 //Add the movie informations to the db
 if (!empty($_POST)) {
     logoutIfCSRFTokenIsNotValid();
-    dump($errorMessages);
     if (empty(array_filter($errorMessages))) {
         if (empty($_GET['id'])) {
             $movieId = createMovie();
@@ -35,7 +34,7 @@ if (!empty($_POST)) {
             alert('Erreur lors de l\'ajout du film');
         }
     } else {
-        alert('Merci de remplir tous les champs du formulaire');
+        alert('Merci de remplir correctement les champs du formulaire');
     }
 }
 

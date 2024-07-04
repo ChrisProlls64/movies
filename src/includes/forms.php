@@ -97,14 +97,17 @@ function checkTextFieldAndGetErrorMessage($field, int $size): ?string
  */
 function checkCategoryFieldAndGetErrorMessage($field): ?string
 {
-    // dump($_POST);
-    // !isset($_POST[$field]) ||
     if (empty($_POST)) {
         return null;
     } 
     if (empty($_POST[$field])) {
-        return '<div style="color: red;" >Merci de sélectionner au moins une catégorie</div>';
-        // return wrapInErrorSpan('Merci de sélectionner au moins une catégorie');
+        return '<div style="
+            width: 100%;
+            margin-top: .25rem;
+            font-size: .875em;
+            color: var(--bs-form-invalid-color);
+            margin-bottom: .25em;"
+            > Merci de sélectionner au moins une catégorie</div>';
     }
     return null;
 }

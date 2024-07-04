@@ -24,7 +24,6 @@ function updateMovie(): bool
         'trailer' => $_POST['trailer']
     ];
 
-    // À FINIR - L'UPDATE DES IMAGES NE SE FAIT QUE SI LES DEUX CHAMPS (poster + sliderImg) SONT REMPLIS
     if (!empty($_FILES['poster']['name'])) {
         $data['poster'] = renameFile($_POST['title']) . '.' . pathinfo($_FILES['poster']['name'], PATHINFO_EXTENSION);
         $sql = "UPDATE movie 

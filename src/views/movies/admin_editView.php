@@ -45,7 +45,7 @@
             <?php } ?>
         </div>
         <?= $errorMessages['categories']; ?>
-        <div class="form-floating mb-2">
+        <div class="form-floating mb-2 mt-2">
             <?php $class = (isset($errorMessages['note'])) ? 'is-invalid' : ''; ?>
             <input name="note" type="number" min="0" max="5" step="0.1" class="form-control <?= $class; ?>" value="<?= getValue('note'); ?>" id="note" placeholder="Note">
             <label for="note">Note de la presse</label>
@@ -53,7 +53,7 @@
         </div>
         <div class="form-floating mb-2">
             <?php $class = (isset($errorMessages['Synopsis'])) ? 'is-invalid' : ''; ?>
-            <input name="synopsis" type="text" maxlength="1500" size="500" class="form-control <?= $class; ?>" value="<?= getValue('synopsis'); ?>" id="synopsis" placeholder="Synopsis">
+            <input name="synopsis" type="text" maxlength="1500" size="500" class="form-control <?= $class; ?>" value="<?= getValue('synopsis'); ?>" id="synopsis" placeholder="Synopsis" row="5">
             <label for="synopsis">Synopsis</label>
             <?= $errorMessages['synopsis']; ?>
         </div>
