@@ -5,30 +5,28 @@ $errorMessages = [
     'director' => null,
     'duration' => null,
     'poster' => null,
-    // 'categories' => null,
+    'categories' => null,
     'note' => null,
     'synopsis' => null,
     'trailer' => null,
-    // 'slider' => null,
-    // 'imgSlider' => null
 ];
 
 // Check error messages for every field and displays it in error style
-$errorMessages['title'] = checkTextFieldAndGetErrorMessage('title', 100);
-$errorMessages['releaseDate'] = checkDateFieldAndGetErrorMessage('releaseDate');
+$errorMessages['title'] = checkTextFieldAndGetErrorMessage('title', 100); // OK
+$errorMessages['releaseDate'] = checkDateFieldAndGetErrorMessage('releaseDate'); 
 $errorMessages['duration'] = checkDurationFieldAndGetErrorMessage('duration');
-$errorMessages['director'] = checkTextFieldAndGetErrorMessage('director', 255);
+$errorMessages['director'] = checkTextFieldAndGetErrorMessage('director', 255); // OK
 // $errorMessages['poster'] = checkImageFieldAndGetErrorMessage('poster', './images/poster');  // ====>> À REVOIR (paramètres)
-// $errorMessages['categories'] = checkTextFieldAndGetErrorMessage('categories', 100);
-$errorMessages['note'] = checkTextFieldAndGetErrorMessage('note', 5);   // ====>> À REVOIR (note comprise entre 0 et 5)
-$errorMessages['synopsis'] = checkTextFieldAndGetErrorMessage('synopsis', 1000);
-$errorMessages['trailer'] = checkIframeFieldAndGetErrorMessage('trailer', 500);
-// $errorMessages['imgSlider'] = checkImageFieldAndGetErrorMessage('synopsis', './images/slider');
+$errorMessages['categories'] = checkCategoryFieldAndGetErrorMessage('category');
+$errorMessages['note'] = checkNoteFieldAndGetErrorMessage('note', 5);   // OK
+$errorMessages['synopsis'] = checkTextFieldAndGetErrorMessage('synopsis', 1000); // OK
+$errorMessages['trailer'] = checkIframeFieldAndGetErrorMessage('trailer', 500); // OK
 
 //Add or update the movies informations
 if (!empty($_POST)) {
+    // dump($errorMessages);
     logoutIfCSRFTokenIsNotValid();
-    if (array_filter($errorMessages)) {
+    if (empty(array_filter($errorMessages))) {
         if (!empty($_GET['id'])) {
             updateMovie();
         } 

@@ -7,12 +7,7 @@ $db;
  */
 
 function createMovie(): string
-{
-    //  compares the csrf token generated at the login, and the token sent into the post 
-    if (!isset($_POST['csrf_token']) ||  $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        die('Invalid CSRF token');
-    }
-    
+{   
     global $db;
     global $router;
     $data = [
@@ -25,18 +20,19 @@ function createMovie(): string
         'note' => $_POST['note'],
         'synopsis' => $_POST['synopsis'],
         'trailer' => $_POST['trailer'],
-        'slider' => $_POST['slider']
+        // 'slider' => $_POST['slider']
     ];
-    if (!empty($_FILES['imgSlider'])) {
-        $data = [
-            'imgSlider' => renameFile($_POST['title']) . '-slider.' . pathinfo($_FILES['imgSlider']['name'], PATHINFO_EXTENSION)
-        ];
-        $sql = "INSERT INTO movie (title, slug, releaseDate, duration, director, poster, note, synopsis, trailer, slider, imgSlider) 
-         VALUES (:title, :slug, :releaseDate, :duration, :director, :poster, :note, :synopsis, :trailer, :slider, :imgSlider)";
-    } else {
-        $sql = "INSERT INTO movie (title, slug, releaseDate, duration, director, poster, note, synopsis, trailer, slider) 
-         VALUES (:title, :slug, :releaseDate, :duration, :director, :poster, :note, :synopsis, :trailer, :slider)";
-    }
+    // if (!empty($_FILES['imgSlider'])) {
+    //     $data = [
+    //         'imgSlider' => renameFile($_POST['title']) . '-slider.' . pathinfo($_FILES['imgSlider']['name'], PATHINFO_EXTENSION)
+    //     ];
+    //     $sql = "INSERT INTO movie (title, slug, releaseDate, duration, director, poster, note, synopsis, trailer, slider, imgSlider) 
+    //      VALUES (:title, :slug, :releaseDate, :duration, :director, :poster, :note, :synopsis, :trailer, :slider, :imgSlider)";
+    // } else {
+        $sql = "INSERT INTO movie (title, slug, releaseDate, duration, director, poster, note, synopsis, trailer) 
+         VALUES (:title, :slug, :releaseDate, :duration, :director, :poster, :note, :synopsis, :trailer)";
+        //  , :slider
+    // }
     try {
         $query = $db->prepare($sql);
         $query->execute($data);
@@ -45,7 +41,7 @@ function createMovie(): string
         die;
     }
     resizeImage(uploadFile('./images/poster', 'poster', $_POST['title']), 500);
-    uploadFile('./images/slider', 'slider', $_POST['title']);
+    // uploadFile('./images/slider', 'slider', $_POST['title']);
     alert('Film ajouté correctement', 'success');
     displayAlert();
     header('Location:' . $router->generate('indexMovies'));

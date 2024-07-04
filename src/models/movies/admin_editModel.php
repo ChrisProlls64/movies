@@ -21,14 +21,12 @@ function updateMovie(): bool
         'director' => $_POST['director'],
         'note' => $_POST['note'],
         'synopsis' => $_POST['synopsis'],
-        'trailer' => $_POST['trailer'],
-        'slider' => $_POST['slider'],
+        'trailer' => $_POST['trailer']
     ];
 
     // À FINIR - L'UPDATE DES IMAGES NE SE FAIT QUE SI LES DEUX CHAMPS (poster + sliderImg) SONT REMPLIS
-    if (!empty($_FILES['poster']['name']) || !empty($_FILES['imgSlider']['name'])) {
+    if (!empty($_FILES['poster']['name'])) {
         $data['poster'] = renameFile($_POST['title']) . '.' . pathinfo($_FILES['poster']['name'], PATHINFO_EXTENSION);
-        $data['imgSlider'] = renameFile($_POST['title']) . '-slider.' . pathinfo($_FILES['imgSlider']['name'], PATHINFO_EXTENSION);
         $sql = "UPDATE movie 
         SET title = :title, 
             slug = :slug, 
@@ -38,12 +36,9 @@ function updateMovie(): bool
             poster = :poster, 
             note = :note, 
             synopsis = :synopsis, 
-            trailer = :trailer, 
-            slider = :slider, 
-            imgSlider = :imgSlider 
+            trailer = :trailer
         WHERE id = :id";
         resizeImage(uploadFile('./images/poster', 'poster', $_POST['title']), 300);
-        uploadFile('./images/slider', 'imgSlider', $_POST['title']) . '-slider';
     } else {
         $sql = "UPDATE movie 
         SET title = :title, 
@@ -53,8 +48,7 @@ function updateMovie(): bool
             director = :director, 
             note = :note, 
             synopsis = :synopsis, 
-            trailer = :trailer,
-            slider = :slider 
+            trailer = :trailer
         WHERE id = :id";
     }
 

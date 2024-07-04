@@ -66,7 +66,7 @@ function wrapInSuccessSpan($message): string
 function isDateValid($date)
 {
     $regex = '/^(\d{4})-(\d{2})-(\d{2})$/';
-    return preg_match($regex, $_POST['releaseDate']);
+    return preg_match($regex, $date);
 }
 
 
@@ -90,26 +90,43 @@ function checkTextFieldAndGetErrorMessage($field, int $size): ?string
     return null;
 }
 
+/**
+ *Check if at least one checkbox is checked and get the error message
+ *@param string $field
+ *@return ?string
+ */
+function checkCategoryFieldAndGetErrorMessage($field): ?string
+{
+    if (!isset($_POST[$field])) {
+        return null;
+    }
+    if (empty($_POST[$field])) {
+        return wrapInErrorSpan('Merci de sélectionner au moins une catégorie');
+    }
+    return null;
+}
+
 
 /**
  *Check if the code in the field doesn't contain any script tag
- *@param  
- * 
+ *@param string $field
+ *@param int $size
+ *@return ?string
  */
 function checkIframeFieldAndGetErrorMessage($field, int $size): ?string
 {
     if (!isset($_POST[$field])) {
         return null;
     }
-    if (empty($_POST[$field])) {
-        return wrapInErrorSpan('Merci de renseigner le champ.');
-    }
+    // if (empty($_POST[$field])) {
+    //     return wrapInErrorSpan('Merci de renseigner le champ.');
+    // }
     if (strlen($_POST[$field]) > $size) {
         return wrapInErrorSpan('Le texte ne doit pas dépasser ' . $size . ' caractères.');
     }
-    if (!empty(strpos($_POST[$field], '<script>'))){
+    $scriptTagPattern = '/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/i';
+    if (strpos(strtolower($_POST[$field]), '<script>') !== false) {     
         return wrapInErrorSpan('Le code contient une erreur');
-
     }
     return null;
 }
@@ -128,8 +145,27 @@ function checkIframeFieldAndGetErrorMessage($field, int $size): ?string
     if (empty($_POST[$field])) {
         return wrapInErrorSpan('Merci de renseigner le champ.');
     }
-    if (!isDateValid($field)) {
+    if (!isDateValid($_POST[$field])) {
         return wrapInErrorSpan('La date n\'est pas au bon format');
+    }
+    return null;
+}
+
+/**
+ * Check if the date is not empty and get the error message
+ * @param string $field
+ * @return ?string
+ */
+ function checkNoteFieldAndGetErrorMessage($field, int $size): ?string
+{
+    if (!isset($_POST[$field])) {
+        return null;
+    }
+    if (empty($_POST[$field])) {
+        return wrapInErrorSpan('Merci de renseigner le champ.');
+    }
+    if ($_POST[$field] > $size) {
+        return wrapInErrorSpan('La note doit être comprise entre 0 et ' . $size . '.');
     }
     return null;
 }
@@ -141,12 +177,17 @@ function checkIframeFieldAndGetErrorMessage($field, int $size): ?string
  */
 function isDurationValid($duration): bool
 {
-    $regex = '/^(\d{2}):(\d{2})$/';
-    return preg_match($regex, $_POST['duration']);
+    $regex1 = '/^(\d{2}):(\d{2})$/';
+    $checkRegex1 = preg_match($regex1, $_POST['duration']);
+    $regex2 = '/^([01]\d|2[0-3]):[0-5]\d:[0-5]\d$/';
+    $checkRegex1 = preg_match($regex2, $_POST['duration']);
+    if ( $checkRegex1 !== false || $checkRegex1 !== false) {
+        return false;
+    }
 }
 
 /**
- * Check if the image uploaded is ok
+ * Check if the duration format is ok
  * @param string $field
  * @return ?string error message wrapped in an error span
  */
