@@ -224,7 +224,7 @@ function checkImageFieldAndGetErrorMessage($field, $path, int $maxSize = 2097152
 {
 	// Check submit form with post method
 	if (empty($_FILES)) :
-		return '';
+		return null;
 	endif;
 	
 	// Check exit directory if not create
