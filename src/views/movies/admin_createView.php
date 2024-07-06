@@ -36,7 +36,6 @@
             <label for="poster">Affiche</label>
             <?= $errorMessages['poster']; ?>
         </div>
-        
         <legend>Catégories</legend>
         <div class="btn-group mb-3" role="group" aria-label="Catégories du film">
             <?php $categories = retrieveAllCategories(); ?>
@@ -55,13 +54,13 @@
         </div>
         <div class="form-floating mb-2">
             <?php $class = (!empty($errorMessages['synopsis'])) ? 'is-invalid' : ''; ?>
-            <textarea name="synopsis" type="text" class="form-control <?= $class; ?>" id="synopsis" size="500" maxlength="1000" value="<?= htmlentities(getValue('synopsis')); ?>"  placeholder="Synopsis" rows="5"></textarea>
+            <input name="synopsis" type="text" class="form-control <?= $class; ?>" id="synopsis" size="500" maxlength="1000" value="<?= htmlentities(getValue('synopsis')); ?>"  placeholder="Synopsis" rows="5"></input>
             <label for="synopsis">Synopsis</label>
             <?= $errorMessages['synopsis']; ?>
         </div>
         <div class="form-floating mb-2">
             <?php $class = (isset($errorMessages['trailer'])) ? 'is-invalid' : ''; ?>
-            <input name="trailer" type="text" class="form-control input-group-text <?= $class; ?>" id="trailer" value="<?= htmlentities(getValue('trailer')); ?>"  placeholder="Lien vers la bande annonce">
+            <input name="trailer" type="text" class="form-control <?= $class; ?>" id="trailer" value="<?= htmlentities(getValue('trailer')); ?>"  placeholder="Lien vers la bande annonce">
             <label for="trailer">Bande annonce</label>
             <?= $errorMessages['trailer']; ?>
         </div>

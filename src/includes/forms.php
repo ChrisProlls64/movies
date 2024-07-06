@@ -48,6 +48,17 @@ function wrapInErrorSpan($message): string
     return '<span class="invalid-feedback">' . $message . '</span>';
 }
 
+function wrapInErrorDiv($message): string
+{
+    return '<div style="
+            width: 100%;
+            margin-top: .25rem;
+            font-size: .875em;
+            color: var(--bs-form-invalid-color);
+            margin-bottom: .25em;"
+            > ' . $message . '</div>';
+}
+
 /**
  * Display the error message in red
  * @param string $message
@@ -99,15 +110,9 @@ function checkCategoryFieldAndGetErrorMessage($field): ?string
 {
     if (empty($_POST)) {
         return null;
-    } 
+    }
     if (empty($_POST[$field])) {
-        return '<div style="
-            width: 100%;
-            margin-top: .25rem;
-            font-size: .875em;
-            color: var(--bs-form-invalid-color);
-            margin-bottom: .25em;"
-            > Merci de sélectionner au moins une catégorie</div>';
+        return wrapInErrorDiv("Merci de sélectionner au moins une catégorie");
     }
     return null;
 }
@@ -131,7 +136,7 @@ function checkIframeFieldAndGetErrorMessage($field, int $size): ?string
         return wrapInErrorSpan('Le texte ne doit pas dépasser ' . $size . ' caractères.');
     }
     $scriptTagPattern = '/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/i';
-    if (strpos(strtolower($_POST[$field]), '<script>') !== false) {     
+    if (strpos(strtolower($_POST[$field]), '<script>') !== false) {
         return wrapInErrorSpan('Le code contient une erreur');
     }
     return null;
@@ -214,46 +219,90 @@ function checkDurationFieldAndGetErrorMessage($field): ?string
 
 
 /**
- * Check if the uploaded file is ok 
+ * Check if the uploaded file is ok
  * @param string $field
  * @param int $sizeMax
  * @param array $extensions
  * @return ?string
  */
-function checkImageFieldAndGetErrorMessage($field, $path, int $maxSize = 2097152, array $exts = ['jpg', 'png', 'jpeg']): ?string
+function checkImageFieldForCreateAndGetErrorMessage($field, $path, int $maxSize = 2097152, array $exts = ['jpg', 'png', 'jpeg']): ?string
 {
 	// Check submit form with post method
-	if (empty($_FILES)) :
+	if (empty($_FILES)) {
 		return null;
-	endif;
-	
+    }
+
 	// Check exit directory if not create
-	if (!is_dir($path) && !mkdir($path, 0755)) :
+	if (!is_dir($path) && !mkdir($path, 0755)) {
 		return wrapInErrorSpan('Impossible d\'importer votre fichier.');
-	endif;
+    }
 
 	// Check not empty input file
-	if (empty($_FILES[$field]['name'])) :
+	if (empty($_FILES[$field]['name'])) {
 		return wrapInErrorSpan('Merci d\'uploader un fichier');
-	endif;
-	
+    }
+
 	// Check exts
 	$currentExt = pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION);
 	$currentExt = strtolower($currentExt);
-	if (!in_array($currentExt, $exts)) :
+	if (!in_array($currentExt, $exts)) {
 		$exts = implode(', ', $exts);
 		return wrapInErrorSpan('Merci de charger un fichier avec l\'une de ces extensions : ' . $exts . '.');
-	endif;
+    }
 
 	// Check no error into current file
-	if ($_FILES[$field]['error'] !== UPLOAD_ERR_OK) :
+	if ($_FILES[$field]['error'] !== UPLOAD_ERR_OK) {
 		return wrapInErrorSpan('Merci de sélectionner un autre fichier.');
-	endif;
+    }
 
 	// Check max size current file
-	if ($_FILES[$field]['size'] > $maxSize) :
+	if ($_FILES[$field]['size'] > $maxSize) {
 		return wrapInErrorSpan('Merci de charger un fichier ne dépassant pas cette taille : ' . formatBytes($maxSize));
-	endif;
+    }
+
+    return null;
+}
+
+/**
+ * Check if the uploaded file is ok
+ * @param string $field
+ * @param int $sizeMax
+ * @param array $extensions
+ * @return ?string
+ */
+function checkImageFieldForEditAndGetErrorMessage($field, $path, int $maxSize = 2097152, array $exts = ['jpg', 'png', 'jpeg']): ?string
+{
+	// Check submit form with post method
+	if (empty($_FILES)) {
+		return null;
+    }
+
+    if ($_FILES[$field]['error'] == UPLOAD_ERR_NO_FILE) {
+        return null;
+    }
+
+	// Check exit directory if not create
+	if (!is_dir($path) && !mkdir($path, 0755)) {
+		return wrapInErrorSpan('Impossible d\'importer votre fichier.');
+    }
+
+	// Check exts
+	$currentExt = pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION);
+	$currentExt = strtolower($currentExt);
+	if (!in_array($currentExt, $exts)) {
+		$exts = implode(', ', $exts);
+		return wrapInErrorSpan('Merci de charger un fichier avec l\'une de ces extensions : ' . $exts . '.');
+    }
+
+	// Check no error into current file
+	if ($_FILES[$field]['error'] !== UPLOAD_ERR_OK) {
+		return wrapInErrorSpan('Merci de sélectionner un autre fichier.');
+    }
+
+	// Check max size current file
+	if ($_FILES[$field]['size'] > $maxSize) {
+		return wrapInErrorSpan('Merci de charger un fichier ne dépassant pas cette taille : ' . formatBytes($maxSize));
+    }
 
     return null;
 }
@@ -336,4 +385,11 @@ function resizeImage($path, $width): void
     $image = $manager->read($path);
     $image->scale($width);
     $image->save($path);
+}
+
+function addElipsisIfTooLong(string $text, int $maxLength): string {
+    if (strlen($text) > $maxLength) {
+        return substr($text, 0, $maxLength)."...";
+    }
+    return $text;
 }

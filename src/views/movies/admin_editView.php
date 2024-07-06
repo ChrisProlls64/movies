@@ -2,7 +2,7 @@
 
 <div class="row g-3 d-flex align-items-center py-4 bg-body-tertiary vertical-center mb-4">
     <form class="form-signin w-100 m-auto" enctype="multipart/form-data" method="POST" action="">
-        <h1 class="h3 mb-3 fw-normal text-center">Modification de la fiche du film "<?= getValue('title'); ?>" </h1>
+        <h1 class="h3 mb-3 fw-normal text-center">Modification de la fiche du film "<?= addElipsisIfTooLong(getValue('title'), 100); ?>" </h1>
         <div class="form-floating mb-2">
             <?php $class = (isset($errorMessages['title'])) ? 'is-invalid' : ''; ?>
             <input name="title" type="text" class="form-control <?= $class; ?>" id="title" value="<?= getValue('title'); ?>" placeholder="Titre du film">
@@ -30,8 +30,8 @@
             <?= $errorMessages['director']; ?>
         </div>
         <div class="form-floating mb-2">
-            <?php $class = (isset($errorMessages['note'])) ? 'is-invalid' : ''; ?>
-            <input name="poster" type="file" class="ps-4 form-control" value="<?= getValue('poster'); ?>" id="poster">
+            <?php $class = (isset($errorMessages['poster'])) ? 'is-invalid' : ''; ?>
+            <input name="poster" type="file" class="ps-4 form-control <?= $class; ?>" value="<?= getValue('poster'); ?>" id="poster">
             <label class="pb-4" for="poster">Ne compléter ce champ que si vous souhaitez changer l'affiche déjà enregistrée</label>
             <?= $errorMessages['poster']; ?>
         </div>
@@ -52,7 +52,7 @@
             <?= $errorMessages['note']; ?>
         </div>
         <div class="form-floating mb-2">
-            <?php $class = (isset($errorMessages['Synopsis'])) ? 'is-invalid' : ''; ?>
+            <?php $class = (isset($errorMessages['synopsis'])) ? 'is-invalid' : ''; ?>
             <input name="synopsis" type="text" maxlength="1500" size="500" class="form-control <?= $class; ?>" value="<?= getValue('synopsis'); ?>" id="synopsis" placeholder="Synopsis" row="5">
             <label for="synopsis">Synopsis</label>
             <?= $errorMessages['synopsis']; ?>

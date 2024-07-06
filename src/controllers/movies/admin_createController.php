@@ -14,10 +14,10 @@ $errorMessages = [
 
 // Check error messages for every field and displays it in error style
 $errorMessages['title'] = checkTextFieldAndGetErrorMessage('title', 100); // OK
-$errorMessages['releaseDate'] = checkDateFieldAndGetErrorMessage('releaseDate'); 
+$errorMessages['releaseDate'] = checkDateFieldAndGetErrorMessage('releaseDate'); // OK
 $errorMessages['duration'] = checkDurationFieldAndGetErrorMessage('duration'); // OK
 $errorMessages['director'] = checkTextFieldAndGetErrorMessage('director', 255); // OK
-$errorMessages['poster'] = checkImageFieldAndGetErrorMessage('poster', './images/poster', 2097152, ['jpg', 'png', ]);  // OK
+$errorMessages['poster'] = checkImageFieldForCreateAndGetErrorMessage('poster', './images/poster', 2097152, ['jpg', 'png', ]);  // OK
 $errorMessages['categories'] = checkCategoryFieldAndGetErrorMessage('categories');
 $errorMessages['note'] = checkNoteFieldAndGetErrorMessage('note', 5);   // OK
 $errorMessages['synopsis'] = checkTextFieldAndGetErrorMessage('synopsis', 1000); // OK
