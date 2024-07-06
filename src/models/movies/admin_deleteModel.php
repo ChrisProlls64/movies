@@ -10,11 +10,8 @@ function deleteMovie()
     $sql = "DELETE FROM movie WHERE id = :id";
     $query = $db->prepare($sql);
     $query->bindParam(':id', $_GET['id']);
-    $query->execute();    
-    // alert('Film supprimé avec succès', 'success');
-    header ('Location:' . $router->generate('indexMovies'));
-
-    // }
+    $query->execute();
+    alert('Film supprimé avec succès', 'success');
 }
 
 

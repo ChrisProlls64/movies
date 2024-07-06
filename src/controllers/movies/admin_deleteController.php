@@ -4,4 +4,5 @@ if (isCSRFTokenValid()) {
   die;
 }
 deleteMovie();
-alert('Fiche supprimée avec succèes', 'success');
+header('Location:' . $router->generate('indexMovies'));
+die;
