@@ -9,7 +9,7 @@ use Intervention\Image\Drivers\Gd\Driver;
  * @param string $message
  * @return array
  */
-function checkEmptyFields($field, $message = 'Veuillez renseigner tous les champs')
+function checkEmptyFields(string $field, string $message = 'Veuillez renseigner tous les champs')
 {
     $result = [
         'class' => '',
@@ -29,7 +29,7 @@ function checkEmptyFields($field, $message = 'Veuillez renseigner tous les champ
  * Return value of the field 
  * @param string $field
  */
-function getValue($field)
+function getValue(string $field)
 {
     if (isset($_POST[$field])) {
         return $_POST[$field];
@@ -39,16 +39,21 @@ function getValue($field)
 
 
 /**
- * Display the error message in red
+ * Display the error message in red in a span
  * @param string $message
  * @return string
  */
-function wrapInErrorSpan($message): string
+function wrapInErrorSpan(string $message): string
 {
     return '<span class="invalid-feedback">' . $message . '</span>';
 }
 
-function wrapInErrorDiv($message): string
+/**
+ * Display the error message in red in a div
+ * @param string $message
+ * @return string
+ */
+function wrapInErrorDiv(string $message): string
 {
     return '<div style="
             width: 100%;
@@ -64,7 +69,7 @@ function wrapInErrorDiv($message): string
  * @param string $message
  * @return string
  */
-function wrapInSuccessSpan($message): string
+function wrapInSuccessSpan(string $message): string
 {
     return '<span class="success">' . $message . '</span>';
 }
@@ -74,7 +79,7 @@ function wrapInSuccessSpan($message): string
  * @param string $date
  * @return bool
  */
-function isDateValid($date)
+function isDateValid(string $date): bool
 {
     $regex = '/^(\d{4})-(\d{2})-(\d{2})$/';
     return preg_match($regex, $date);
@@ -87,7 +92,7 @@ function isDateValid($date)
  *@param int $size
  *@return ?string
  */
-function checkTextFieldAndGetErrorMessage($field, int $size): ?string
+function checkTextFieldAndGetErrorMessage(string $field, int $size): ?string
 {
     if (!isset($_POST[$field])) {
         return null;
@@ -106,7 +111,7 @@ function checkTextFieldAndGetErrorMessage($field, int $size): ?string
  *@param string $field
  *@return ?string
  */
-function checkCategoryFieldAndGetErrorMessage($field): ?string
+function checkCategoryFieldAndGetErrorMessage(string $field): ?string
 {
     if (empty($_POST)) {
         return null;
@@ -124,7 +129,7 @@ function checkCategoryFieldAndGetErrorMessage($field): ?string
  *@param int $size
  *@return ?string
  */
-function checkIframeFieldAndGetErrorMessage($field, int $size): ?string
+function checkIframeFieldAndGetErrorMessage(string $field, int $size): ?string
 {
     if (!isset($_POST[$field])) {
         return null;
@@ -148,7 +153,7 @@ function checkIframeFieldAndGetErrorMessage($field, int $size): ?string
  * @param string $field
  * @return ?string
  */
- function checkDateFieldAndGetErrorMessage($field): ?string
+ function checkDateFieldAndGetErrorMessage(string $field): ?string
 {
     if (!isset($_POST[$field])) {
         return null;
@@ -167,7 +172,7 @@ function checkIframeFieldAndGetErrorMessage($field, int $size): ?string
  * @param string $field
  * @return ?string
  */
- function checkNoteFieldAndGetErrorMessage($field, int $size): ?string
+ function checkNoteFieldAndGetErrorMessage(string $field, int $size): ?string
 {
     if (!isset($_POST[$field])) {
         return null;
@@ -183,15 +188,15 @@ function checkIframeFieldAndGetErrorMessage($field, int $size): ?string
 
 /**
  * Is duration valid
- * @param string $date
+ * @param string $duration
  * @return bool
  */
 function isDurationValid($duration): bool
 {
     $regex1 = '/^(\d{2}):(\d{2})$/';
-    $checkRegex1 = preg_match($regex1, $_POST['duration']);
+    $checkRegex1 = preg_match($regex1, $duration);
     $regex2 = '/^([01]\d|2[0-3]):[0-5]\d:[0-5]\d$/';
-    $checkRegex1 = preg_match($regex2, $_POST['duration']);
+    $checkRegex1 = preg_match($regex2, $duration);
     if ( $checkRegex1 !== false || $checkRegex1 !== false) {
         return false;
     }
@@ -202,7 +207,7 @@ function isDurationValid($duration): bool
  * @param string $field
  * @return ?string error message wrapped in an error span
  */
-function checkDurationFieldAndGetErrorMessage($field): ?string
+function checkDurationFieldAndGetErrorMessage(string $field): ?string
 {
     if (!isset($_POST[$field])) {
         return null;
@@ -210,7 +215,7 @@ function checkDurationFieldAndGetErrorMessage($field): ?string
     if (empty($_POST[$field])) {
         return wrapInErrorSpan('Merci de renseigner le champ.');
     }
-    if (isDurationValid($field)) {
+    if (isDurationValid($_POST[$field])) {
         return wrapInErrorSpan('La durée n\'est pas au bon format');
     }
     return null;
@@ -221,11 +226,12 @@ function checkDurationFieldAndGetErrorMessage($field): ?string
 /**
  * Check if the uploaded file is ok
  * @param string $field
+ * @param string $path
  * @param int $sizeMax
  * @param array $extensions
  * @return ?string
  */
-function checkImageFieldForCreateAndGetErrorMessage($field, $path, int $maxSize = 2097152, array $exts = ['jpg', 'png', 'jpeg']): ?string
+function checkImageFieldForCreateAndGetErrorMessage(string $field, string $path, int $maxSize = 2097152, array $exts = ['jpg', 'png', 'jpeg']): ?string
 {
 	// Check submit form with post method
 	if (empty($_FILES)) {
@@ -270,7 +276,7 @@ function checkImageFieldForCreateAndGetErrorMessage($field, $path, int $maxSize 
  * @param array $extensions
  * @return ?string
  */
-function checkImageFieldForEditAndGetErrorMessage($field, $path, int $maxSize = 2097152, array $exts = ['jpg', 'png', 'jpeg']): ?string
+function checkImageFieldForEditAndGetErrorMessage(string $field, string $path, int $maxSize = 2097152, array $exts = ['jpg', 'png', 'jpeg']): ?string
 {
 	// Check submit form with post method
 	if (empty($_FILES)) {
@@ -317,7 +323,7 @@ function checkImageFieldForEditAndGetErrorMessage($field, $path, int $maxSize = 
  * @param string $toRename /name that will be used to rename the uploaded file
  * @return string $targetToSave / the final path + name and extension of the file   
  */
-function uploadFile(string $path, string $field, $toRename): string
+function uploadFile(string $path, string $field, string $toRename): string
 {
 	$targetToSave = $path . '/' . renameFile($toRename) . '.' . pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION);
     move_uploaded_file($_FILES[$field]['tmp_name'], $targetToSave);    
@@ -342,7 +348,7 @@ function formatBytes($size, $precision = 2)
  * @param string $name
  * @return string $name
  */
-function renameFile($name): string 
+function renameFile(string $name): string 
 {
 	$name = trim($name);
 	$name = strip_tags($name);
@@ -362,7 +368,7 @@ function renameFile($name): string
  * @param string $string
  * @return string $string
  */
-function removeAccent($string): string 
+function removeAccent(string $string): string 
 {
 	$string = str_replace(
 		['à','á','â','ã','ä', 'ç', 'è','é','ê','ë', 'ì','í','î','ï', 'ñ', 'ò','ó','ô','õ','ö', 'ù','ú','û','ü', 'ý','ÿ', 'À','Á','Â','Ã','Ä', 'Ç', 'È','É','Ê','Ë', 'Ì','Í','Î','Ï', 'Ñ', 'Ò','Ó','Ô','Õ','Ö', 'Ù','Ú','Û','Ü', 'Ý'], 
@@ -379,7 +385,7 @@ function removeAccent($string): string
  * @param int $width
  * @return void
  */
-function resizeImage($path, $width): void
+function resizeImage(string $path, int $width): void
 {
     $manager = new ImageManager(new Driver());
     $image = $manager->read($path);

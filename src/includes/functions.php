@@ -50,8 +50,6 @@ function displayAlert(): void
     }
 }
 
-
-
 /**
  * Check if user is connected
  * @param array $match The match array from AltoRouter
@@ -66,7 +64,6 @@ function displayAlert(): void
          die;
      }
  }
- 
  
  /**
   * Déconnecte après un certain temps de connexion
