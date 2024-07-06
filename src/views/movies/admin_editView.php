@@ -37,7 +37,7 @@
         </div>
         <legend>Catégories </legend>
         <div class="btn-group" role="group" aria-label="Catégories du film">
-            <?php $categories = retrieveAllCategoriesWithMovieSelection(getValue('id')); ?>
+            <?php $categories = retrieveAllCategoriesWithMovieSelection($_GET['id']); ?>
             <?php foreach ($categories as $category) { ?>
                 <?php $checked = $category['checked'] === true ? 'checked' : ''; ?>
                 <input name="categories[]" type="checkbox" class="btn-check" <?= $checked ?> id="<?= $category['id'] ?>" value="<?= $category['id'] ?>" autocomplete="off">
