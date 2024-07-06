@@ -30,6 +30,9 @@ if (!empty($_POST)) {
         if (empty($_GET['id'])) {
             $movieId = createMovie();
             addCategoriesToMovie($movieId);
+            alert('Film ajouté correctement', 'success');
+            header('Location:' . $router->generate('indexMovies'));
+            die;
         } else {
             alert('Erreur lors de l\'ajout du film');
         }
