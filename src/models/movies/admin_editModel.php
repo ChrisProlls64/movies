@@ -7,8 +7,9 @@
  * @return bool
  */
 
-function updateMovie(): bool
+function updateMovie()
 {
+    printDebug("qoeidjnoiqznd");
     global $db;
     global $router;
 
@@ -26,27 +27,27 @@ function updateMovie(): bool
 
     if (!empty($_FILES['poster']['name'])) {
         $data['poster'] = renameFile($_POST['title']) . '.' . pathinfo($_FILES['poster']['name'], PATHINFO_EXTENSION);
-        $sql = "UPDATE movie 
-        SET title = :title, 
-            slug = :slug, 
-            releaseDate = :releaseDate, 
-            duration = :duration, 
-            director = :director, 
-            poster = :poster, 
-            note = :note, 
-            synopsis = :synopsis, 
+        $sql = "UPDATE movie
+        SET title = :title,
+            slug = :slug,
+            releaseDate = :releaseDate,
+            duration = :duration,
+            director = :director,
+            poster = :poster,
+            note = :note,
+            synopsis = :synopsis,
             trailer = :trailer
         WHERE id = :id";
         resizeImage(uploadFile('./images/poster', 'poster', $_POST['title']), 300);
     } else {
-        $sql = "UPDATE movie 
-        SET title = :title, 
-            slug = :slug, 
-            releaseDate = :releaseDate, 
-            duration = :duration, 
-            director = :director, 
-            note = :note, 
-            synopsis = :synopsis, 
+        $sql = "UPDATE movie
+        SET title = :title,
+            slug = :slug,
+            releaseDate = :releaseDate,
+            duration = :duration,
+            director = :director,
+            note = :note,
+            synopsis = :synopsis,
             trailer = :trailer
         WHERE id = :id";
     }
@@ -54,16 +55,14 @@ function updateMovie(): bool
     try {
         $query = $db->prepare($sql);
         $query->execute($data);
-        alert('Film modifié avec succès', 'success');
-        displayAlert();
     } catch (PDOException $e) {
+        printDebug("ERRREUR");
         dump($e->getMessage());
         die;
     }
     flushCategoriesForMovie($_GET['id']);
     addCategoriesToMovie($_GET['id']);
-    header('Location:' . $router->generate('indexMovies'));
-    return true;
+    alert('Film modifié avec succès', 'success');
 }
 
 

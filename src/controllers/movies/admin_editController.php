@@ -16,7 +16,7 @@ $errorMessages['title'] = checkTextFieldAndGetErrorMessage('title', 100); // OK
 $errorMessages['releaseDate'] = checkDateFieldAndGetErrorMessage('releaseDate'); 
 $errorMessages['duration'] = checkDurationFieldAndGetErrorMessage('duration');
 $errorMessages['director'] = checkTextFieldAndGetErrorMessage('director', 255); // OK
-$errorMessages['poster'] = checkImageFieldAndGetErrorMessage('poster', './images/poster', 2097152, ['jpeg', 'jpg', 'png']);  // OK
+// $errorMessages['poster'] = checkImageFieldAndGetErrorMessage('poster', './images/poster', 2097152, ['jpeg', 'jpg', 'png']);  // OK
 $errorMessages['categories'] = checkCategoryFieldAndGetErrorMessage('categories');
 $errorMessages['note'] = checkNoteFieldAndGetErrorMessage('note', 5);   // OK
 $errorMessages['synopsis'] = checkTextFieldAndGetErrorMessage('synopsis', 1000); // OK
@@ -28,15 +28,15 @@ if (!empty($_POST)) {
     if (empty(array_filter($errorMessages))) {
         if (!empty($_GET['id'])) {
             updateMovie();
-        } 
+            header('Location:' . $router->generate('indexMovies'));
+            die;
+        }
     } else {
         alert('Merci de remplir correctement les champs du formulaire');
     }
 } else if (!empty($_GET['id'])) {
     $_POST = retrieveMovieInfos($_GET['id']);
 }
-
-
 
 
 
