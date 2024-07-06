@@ -35,13 +35,13 @@
             <label class="pb-4" for="poster">Ne compléter ce champ que si vous souhaitez changer l'affiche déjà enregistrée</label>
             <?= $errorMessages['poster']; ?>
         </div>
-        <legend>Catégories </legend>
-        <div class="btn-group" role="group" aria-label="Catégories du film">
+        <legend class="mb-0 fs-6">Catégories :</legend>
+        <div class="btn-sm-group" role="group" aria-label="Catégories du film">
             <?php $categories = retrieveAllCategoriesWithMovieSelection($_GET['id']); ?>
             <?php foreach ($categories as $category) { ?>
                 <?php $checked = $category['checked'] === true ? 'checked' : ''; ?>
-                <input name="categories[]" type="checkbox" class="btn-check" <?= $checked ?> id="<?= $category['id'] ?>" value="<?= $category['id'] ?>" autocomplete="off">
-                <label for="<?= $category['id'] ?>" class="btn btn-outline-primary"><?= $category['name'] ?></label>
+                <input name="categories[]" type="checkbox" class="form-control btn-check" <?= $checked ?> id="<?= $category['id'] ?>" value="<?= $category['id'] ?>" autocomplete="off">
+                <label for="<?= $category['id'] ?>" class="btn btn-outline-primary mt-2"><?= $category['name'] ?></label>
             <?php } ?>
         </div>
         <?= $errorMessages['categories']; ?>
@@ -66,7 +66,7 @@
         <?php if (isset($_SESSION['csrf_token'])) {
             echo '<input type="hidden" name="csrf_token" value="' . $_SESSION['csrf_token'] . '">';
         } ?>
-        <button class="btn btn-primary w-100 py-2" type="submit">Modifier la fiche du film</button>
+        <button class="btn btn-success w-100 py-2" type="submit">Modifier la fiche du film</button>
     </form>
 </div>
 

@@ -32,21 +32,20 @@
         </div>
         <div class="form-floating mb-2">
             <?php $class = (isset($errorMessages['poster'])) ? 'is-invalid' : ''; ?>
-            <input name="poster" type="file" class="form-control <?= $class; ?>" value="<?= htmlentities(getValue('poster')); ?>" id="poster" placeholder="Lien vers l'affiche">
+            <input name="poster" type="file" class="ps-4 form-control <?= $class; ?>" value="<?= htmlentities(getValue('poster')); ?>" id="poster" placeholder="Lien vers l'affiche">
             <label for="poster">Affiche</label>
             <?= $errorMessages['poster']; ?>
         </div>
-        <legend>Catégories</legend>
-        <div class="btn-group mb-3" role="group" aria-label="Catégories du film">
+        <legend class="mb-0 fs-6">Catégories :</legend>
+        <div class="btn-sm-group" role="group" aria-label="Catégories du film">
             <?php $categories = retrieveAllCategories(); ?>
-            <?php foreach ($categories as $category) : { ?>
-                    <input name="categories[]" type="checkbox" class="form-control <?= $class; ?> btn-check" id="<?= $category['id'] ?>" value="<?= $category['id'] ?>" autocomplete="off">
-                    <label for="<?= $category['id'] ?>" class="btn btn-outline-primary"><?= $category['name'] ?></label>
-            <?php }
-            endforeach; ?>
+            <?php foreach ($categories as $category) { ?>
+                <input name="categories[]" type="checkbox" class="form-control btn-check" id="<?= $category['id'] ?>" value="<?= $category['id'] ?>" autocomplete="off">
+                <label for="<?= $category['id'] ?>" class="btn btn-outline-primary mt-2"><?= $category['name'] ?></label>
+            <?php } ?>
         </div>
         <?= $errorMessages['categories']; ?>
-        <div class="form-floating mb-2">
+        <div class="form-floating mb-2 mt-2">
             <?php $class = (isset($errorMessages['note'])) ? 'is-invalid' : ''; ?>
             <input name="note" type="number" min="0" max="5" step="0.1" class="form-control <?= $class; ?>" value="<?= htmlentities(getValue('note')); ?>" id="note" placeholder="Note">
             <label for="note">Note de la presse</label>
@@ -69,10 +68,8 @@
             echo '<input type="hidden" name="csrf_token" value="' . $_SESSION['csrf_token'] . '">';
         }; ?>
         </div>
-        <button class="btn btn-primary w-100 py-2" type="submit">Créer</button>
+        <button class="btn btn-success w-100 py-2" type="submit">Ajouter</button>
     </form>
 </div>
 
 <?php get_footer('admin'); ?>
-
-
