@@ -5,4 +5,5 @@ function logout(){
     unset($_SESSION['user']);
     unset($_SESSION['csrf_token']);
     header('Location: ' . $router->generate('login'));
+    die;
 }

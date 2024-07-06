@@ -33,7 +33,7 @@ function saveLastLogin(string $userId)
 }
 
 /**
- * Generates a token when logged in, to avoid CSRF attacks
+ * Generates a token when logged in, to limit CSRF attacks
  * @return string $token
  *  */
 function generateCsrfToken(): string

@@ -125,6 +125,8 @@ function retrieveAllCategoriesNamesForMovie($movieId): array
 
  /**
  * Returns all the informations of a movie along its categories names
+ * @param int $id
+ * @return array $movie
  */
 function retrieveMovieWithCategoriesNames($id) : array 
 {
@@ -134,3 +136,4 @@ function retrieveMovieWithCategoriesNames($id) : array
     return $movie;
 
 }
+

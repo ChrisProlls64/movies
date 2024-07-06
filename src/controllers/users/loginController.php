@@ -1,7 +1,6 @@
 <?php
 
 if (!empty($_POST['birthDate'])){
-    alert('Vous ne pouvez pas vous connecter à ce site');
     header('Location: ' . $router->generate('home'));
     die;
 } else if (!empty($_POST['email'])  && !empty($_POST['pwd'])) {
@@ -44,7 +43,7 @@ if (!empty($_POST['birthDate'])){
          $_SESSION['loginAttempts'][$adresseIP]++;
      }
      if (isset($_SESSION['timestamp'])) {
-         // Check si le nombre de tentatives dépasse le seuil À revoir
+         // Check si le nombre de tentatives dépasse le seuil || À revoir
          if ($_SESSION['loginAttempts'][$adresseIP] >= $maxAttempts && time() - $_SESSION['timestamp'][$adresseIP] < $periodeRateLimit) {
              alert('Trop de tentatives de connexion. Veuillez réessayer plus tard.');
              header('Location: ' . $router->generate('home'));
