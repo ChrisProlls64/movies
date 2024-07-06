@@ -9,7 +9,6 @@
 
 function updateMovie()
 {
-    printDebug("qoeidjnoiqznd");
     global $db;
     global $router;
 
@@ -56,7 +55,6 @@ function updateMovie()
         $query = $db->prepare($sql);
         $query->execute($data);
     } catch (PDOException $e) {
-        printDebug("ERRREUR");
         dump($e->getMessage());
         die;
     }

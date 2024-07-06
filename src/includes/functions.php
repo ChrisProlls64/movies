@@ -93,5 +93,3 @@ function displayAlert(): void
          }
      }
  }
- 
-// dump($_SESSION);
