@@ -1,5 +1,6 @@
 <?php
-
+// dump($_SESSION);
+// dump($_POST);
 $errorMessages = [
     'title' => null,
     'releaseDate' => null,

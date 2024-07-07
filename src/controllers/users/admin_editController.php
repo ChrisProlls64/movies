@@ -10,7 +10,11 @@ $errorMessages = [
 if (!empty($_POST['email'])) {
     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         $errorMessages['email'] = 'L\'adresse email n\'est pas valide';
-    } else if (checkAlreadyExistEmail()) {
+    }
+    if (checkAlreadyExistEmail()) {
+        $errorMessages['email'] = 'Le champ contient une erreur.';
+    }
+    if (containsScriptTag($_POST['email'])) {
         $errorMessages['email'] = 'L\'adresse email existe déjà';
     }
 }
@@ -22,10 +26,15 @@ if (!empty($_POST['pwd'])) {
     $regex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{12,}$/';
     if (!preg_match($regex, $_POST['pwd'])) {
         $errorMessages['pwd'] = 'Merci de respecter le format indiqué.';
-    } else if ($_POST['pwd'] !== $_POST['pwdConfirm']) {
+    }
+    if (containsScriptTag($_POST['pwd'])) {
+        $errorMessages['pwd'] = 'Le champ contient une erreur.'; 
+    }
+    if ($_POST['pwd'] !== $_POST['pwdConfirm']) {
         $errorMessages['pwdConfirm'] = 'Les mots de passe ne sont pas identiques.';
     }
 }
+
 
 /*save user in db */
 

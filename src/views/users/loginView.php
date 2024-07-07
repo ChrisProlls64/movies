@@ -6,7 +6,8 @@
     body,
     .vertical-center {
         height: 100%;
-
+        margin-top: auto;
+        margin-bottom: auto;
     }
 
     .form-signin {
@@ -81,7 +82,9 @@
 
 <div class="d-flex align-items-center py-4 bg-body-tertiary vertical-center">
     <form class="form-signin w-30 m-auto" method="POST">
+        <a href="http://localhost:8888/movies">
         <img class="mb-4" src="/movies/images/animascoop_logo.png">
+        </a>
         <!-- <h1 class="h3 mb-3 fw-normal text-center">Connexion</h1> -->
         <div class="form-floating form-full-width">
             <?php $error = checkEmptyFields('email'); ?>

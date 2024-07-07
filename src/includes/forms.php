@@ -103,6 +103,9 @@ function checkTextFieldAndGetErrorMessage(string $field, int $size): ?string
     if (strlen($_POST[$field]) > $size) {
         return wrapInErrorSpan('Le texte ne doit pas dépasser ' . $size . ' caractères.');
     }
+    if (containsScriptTag($_POST[$field]) !== 0) {
+        return wrapInErrorSpan('Le champ contient une erreur');
+    }  
     return null;
 }
 
@@ -118,10 +121,19 @@ function checkCategoryFieldAndGetErrorMessage(string $field): ?string
     }
     if (empty($_POST[$field])) {
         return wrapInErrorDiv("Merci de sélectionner au moins une catégorie");
-    }
+    } 
     return null;
 }
 
+/** 
+ * Check if the string contains a script tag
+ * @param string $inputValue
+ * @return bool
+ */
+function containsScriptTag(string $inputValue) {
+    $regex = '/<\s*script\b[^>]*>/i';
+    return preg_match($regex, $inputValue);
+}
 
 /**
  *Check if the code in the field doesn't contain any script tag
@@ -134,19 +146,19 @@ function checkIframeFieldAndGetErrorMessage(string $field, int $size): ?string
     if (!isset($_POST[$field])) {
         return null;
     }
-    // if (empty($_POST[$field])) {
-    //     return wrapInErrorSpan('Merci de renseigner le champ.');
-    // }
     if (strlen($_POST[$field]) > $size) {
         return wrapInErrorSpan('Le texte ne doit pas dépasser ' . $size . ' caractères.');
     }
-    $scriptTagPattern = '/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/i';
-    if (strpos(strtolower($_POST[$field]), '<script>') !== false) {
-        return wrapInErrorSpan('Le code contient une erreur');
-    }
+    if (containsScriptTag($_POST[$field]) !== 0) {
+        return wrapInErrorSpan('Le champ contient une erreur');
+    }    
     return null;
 }
 
+    // if (strpos(strtolower($_POST[$field]), '<script>') !== false) {
+        //     return wrapInErrorSpan('Le code contient une erreur');
+        // }
+    
 
 /**
  * Check if the date is not empty and get the error message
@@ -164,6 +176,9 @@ function checkIframeFieldAndGetErrorMessage(string $field, int $size): ?string
     if (!isDateValid($_POST[$field])) {
         return wrapInErrorSpan('La date n\'est pas au bon format');
     }
+    if (containsScriptTag($_POST[$field]) !== 0) {
+        return wrapInErrorSpan('Le champ contient une erreur');
+    }  
     return null;
 }
 
@@ -183,6 +198,9 @@ function checkIframeFieldAndGetErrorMessage(string $field, int $size): ?string
     if ($_POST[$field] > $size) {
         return wrapInErrorSpan('La note doit être comprise entre 0 et ' . $size . '.');
     }
+    if (containsScriptTag($_POST[$field]) !== 0) {
+        return wrapInErrorSpan('Le champ contient une erreur');
+    }  
     return null;
 }
 
@@ -218,6 +236,9 @@ function checkDurationFieldAndGetErrorMessage(string $field): ?string
     if (isDurationValid($_POST[$field])) {
         return wrapInErrorSpan('La durée n\'est pas au bon format');
     }
+    if (containsScriptTag($_POST[$field]) !== 0) {
+        return wrapInErrorSpan('Le champ contient une erreur');
+    }  
     return null;
 }
 
@@ -233,22 +254,20 @@ function checkDurationFieldAndGetErrorMessage(string $field): ?string
  */
 function checkImageFieldForCreateAndGetErrorMessage(string $field, string $path, int $maxSize = 2097152, array $exts = ['jpg', 'png', 'jpeg']): ?string
 {
-	// Check submit form with post method
 	if (empty($_FILES)) {
 		return null;
     }
 
-	// Check exit directory if not create
+	// Check if the directory exists, if not creates it, returns an error message if it fails
 	if (!is_dir($path) && !mkdir($path, 0755)) {
 		return wrapInErrorSpan('Impossible d\'importer votre fichier.');
     }
 
-	// Check not empty input file
 	if (empty($_FILES[$field]['name'])) {
 		return wrapInErrorSpan('Merci d\'uploader un fichier');
     }
 
-	// Check exts
+	// Check file extensions with the authorized ones in param
 	$currentExt = pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION);
 	$currentExt = strtolower($currentExt);
 	if (!in_array($currentExt, $exts)) {
@@ -256,12 +275,12 @@ function checkImageFieldForCreateAndGetErrorMessage(string $field, string $path,
 		return wrapInErrorSpan('Merci de charger un fichier avec l\'une de ces extensions : ' . $exts . '.');
     }
 
-	// Check no error into current file
+	// Check errors into the current file
 	if ($_FILES[$field]['error'] !== UPLOAD_ERR_OK) {
 		return wrapInErrorSpan('Merci de sélectionner un autre fichier.');
     }
 
-	// Check max size current file
+	// Check max size of the current file
 	if ($_FILES[$field]['size'] > $maxSize) {
 		return wrapInErrorSpan('Merci de charger un fichier ne dépassant pas cette taille : ' . formatBytes($maxSize));
     }
@@ -278,21 +297,21 @@ function checkImageFieldForCreateAndGetErrorMessage(string $field, string $path,
  */
 function checkImageFieldForEditAndGetErrorMessage(string $field, string $path, int $maxSize = 2097152, array $exts = ['jpg', 'png', 'jpeg']): ?string
 {
-	// Check submit form with post method
 	if (empty($_FILES)) {
 		return null;
     }
 
+    // Check if no file was uploaded 
     if ($_FILES[$field]['error'] == UPLOAD_ERR_NO_FILE) {
         return null;
     }
 
-	// Check exit directory if not create
+	// Check if the directory exists, if not creates it, returns an error message if it fails
 	if (!is_dir($path) && !mkdir($path, 0755)) {
 		return wrapInErrorSpan('Impossible d\'importer votre fichier.');
     }
 
-	// Check exts
+	// Check file extensions with the authorized ones in param
 	$currentExt = pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION);
 	$currentExt = strtolower($currentExt);
 	if (!in_array($currentExt, $exts)) {
@@ -300,12 +319,12 @@ function checkImageFieldForEditAndGetErrorMessage(string $field, string $path, i
 		return wrapInErrorSpan('Merci de charger un fichier avec l\'une de ces extensions : ' . $exts . '.');
     }
 
-	// Check no error into current file
+	// Check errors into the current file
 	if ($_FILES[$field]['error'] !== UPLOAD_ERR_OK) {
 		return wrapInErrorSpan('Merci de sélectionner un autre fichier.');
     }
 
-	// Check max size current file
+	// Check max size of the current file
 	if ($_FILES[$field]['size'] > $maxSize) {
 		return wrapInErrorSpan('Merci de charger un fichier ne dépassant pas cette taille : ' . formatBytes($maxSize));
     }

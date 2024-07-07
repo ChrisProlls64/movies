@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -9,5 +9,5 @@
 </head>
 
 <body>
-    <main class="container mb-4">
+    <main class="container mb-4" style="height: 100vh;">
         <?php displayAlert(); ?>
