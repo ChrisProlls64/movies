@@ -99,11 +99,11 @@ function retrieveAllCategoriesNamesForMovie($movieId): array
 /**
  * Associates the movie id and the categories id in the db
  * @param string $movieId
+ * @return void
  */
  function addCategoriesToMovie(string $movieId): void
  {
      global $db;
-     global $router;
  
      $categories = $_POST['categories'];
      foreach ($categories as $categoryId) {
